@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class UtilisateurDtoSend {
-    private int id_utilisateur;
+public class UtilisateurDtoReceive {
     private String nom;
     private String email;
+    private String password;
+    private int phone;
 }
