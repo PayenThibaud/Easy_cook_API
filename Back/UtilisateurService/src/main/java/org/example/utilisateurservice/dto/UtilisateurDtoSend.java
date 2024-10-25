@@ -15,4 +15,5 @@ public class UtilisateurDtoSend {
     private String email;
     private String password;
     private int phone;
+    private boolean isAdmin = false;
 }

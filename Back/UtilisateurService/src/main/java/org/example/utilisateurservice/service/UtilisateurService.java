@@ -26,6 +26,7 @@ public class UtilisateurService {
                 .email(utilisateur.getEmail())
                 .password(utilisateur.getPassword())
                 .phone(utilisateur.getPhone())
+                .isAdmin(utilisateur.isAdmin())
                 .build();
     }
 
@@ -53,6 +54,7 @@ public class UtilisateurService {
                 .email(utilisateurDtoReceive.getEmail())
                 .password(utilisateurDtoReceive.getPassword())
                 .phone(utilisateurDtoReceive.getPhone())
+                .isAdmin(false)
                 .build();
 
         return utilisateurMapperUtilisateurDTOSend(utilisateurRepository.save(utilisateur));
@@ -65,6 +67,7 @@ public class UtilisateurService {
         utilisateur.setEmail(utilisateurDtoReceive.getEmail());
         utilisateur.setPhone(utilisateurDtoReceive.getPhone());
         utilisateur.setPassword(utilisateurDtoReceive.getPassword());
+        utilisateur.setAdmin(false);
 
         return utilisateurMapperUtilisateurDTOSend(utilisateurRepository.save(utilisateur));
     }
