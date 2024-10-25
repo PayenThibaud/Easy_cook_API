@@ -24,6 +24,8 @@ public class UtilisateurService {
                 .id_utilisateur(utilisateur.getId_utilisateur())
                 .nom(utilisateur.getNom())
                 .email(utilisateur.getEmail())
+                .password(utilisateur.getPassword())
+                .phone(utilisateur.getPhone())
                 .build();
     }
 
@@ -49,6 +51,8 @@ public class UtilisateurService {
         Utilisateur utilisateur = Utilisateur.builder()
                 .nom(utilisateurDtoReceive.getNom())
                 .email(utilisateurDtoReceive.getEmail())
+                .password(utilisateurDtoReceive.getPassword())
+                .phone(utilisateurDtoReceive.getPhone())
                 .build();
 
         return utilisateurMapperUtilisateurDTOSend(utilisateurRepository.save(utilisateur));
@@ -59,6 +63,8 @@ public class UtilisateurService {
 
         utilisateur.setNom(utilisateurDtoReceive.getNom());
         utilisateur.setEmail(utilisateurDtoReceive.getEmail());
+        utilisateur.setPhone(utilisateurDtoReceive.getPhone());
+        utilisateur.setPassword(utilisateurDtoReceive.getPassword());
 
         return utilisateurMapperUtilisateurDTOSend(utilisateurRepository.save(utilisateur));
     }
