@@ -6,21 +6,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class Frigo {
+public class FrigoAliment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_frigo;
+    private int id_frigoAliment;
 
-    private int id_utilisateur;
+    @ManyToOne
+    @JoinColumn(name = "frigo_id")
+    private Frigo frigo;
 
-    @OneToMany(mappedBy = "frigo", cascade = CascadeType.REMOVE)
-    private List<FrigoAliment> AlimentsDansLeFrigo;
+    private int id_aliment;
+    private int quantity;
 }
+
 
