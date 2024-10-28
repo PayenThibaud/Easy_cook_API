@@ -1,0 +1,46 @@
+
+
+<div class="p-8">
+    <a routerLink="/recettes">Retour</a>
+
+    <h1>Détail de la recette</h1>
+
+    <h2>{{ recipe.nom }}</h2>
+    <p>Durée : {{ recipe.duree }}</p>
+    <p>{{ recipe.calorie }} Calories</p>
+    <p>Régime :</p>
+    <ul>
+        @for(spec of recipe.regime; track spec) {
+            <li>{{spec}}</li>
+        } @empty {
+            <li>Pas de spécificités</li>
+        }
+    </ul>
+    <p>Auteur : {{ recipe.auteur }}</p>
+
+    <h1>Ingrédients :</h1>
+    <ul>
+        @for(ingredient of recipe.ingredients; track ingredient) {
+            @if (ingredient.gramme !== 0) {
+                <li>{{ ingredient.gramme }} gramme(s) {{ ingredient.nom }}</li>
+            }
+            @if (ingredient.litre !== 0) {
+                <li>{{ ingredient.litre }} litre(s) {{ ingredient.nom }}</li>
+            }
+        }
+    </ul>
+
+    <h1>Etapes :</h1>
+    <ul>
+        @for(etape of recipe.etapes; track etape; let i = $index) {
+            <li>{{ i + 1 }} - {{ etape }}</li>
+        }
+    </ul>
+
+    <img [src]="recipe.image" alt="recipe.nom">
+
+
+
+
+
+</div>
