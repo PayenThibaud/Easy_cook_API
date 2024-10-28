@@ -1,22 +1,15 @@
-package org.example.frigoservice.entity;
+package org.example.frigoservice.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class Frigo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FrigoDtoSend {
     private int id_frigo;
     private int id_utilisateur;
 }
-

@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface FrigoRepository extends CrudRepository<Frigo, Integer> {
-    Optional<Object> findByUtilisateurId(int id);
 }
