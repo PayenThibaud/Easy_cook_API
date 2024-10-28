@@ -1,15 +1,14 @@
-package org.example.frigoservice.dto;
+package org.example.gatewayservice.dto.FrigoDto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Data
-public class FrigoDtoReceive {
+public class FrigoDtoResponse {
+    private int id_frigo;
     private int id_utilisateur;
     private String nom;
 }

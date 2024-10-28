@@ -23,6 +23,7 @@ public class FrigoService {
         return FrigoDtoSend.builder()
                 .id_frigo(frigo.getId_frigo())
                 .id_utilisateur(frigo.getId_utilisateur())
+                .nom(frigo.getNom())
                 .build();
     }
 
@@ -47,6 +48,7 @@ public class FrigoService {
 
         Frigo frigo = Frigo.builder()
                 .id_utilisateur(frigoDtoReceive.getId_utilisateur())
+                .nom(frigoDtoReceive.getNom())
                 .build();
 
         return frigoMapperFrigoDTOSend(frigoRepository.save(frigo));
@@ -56,6 +58,7 @@ public class FrigoService {
         Frigo frigo = findById(id);
 
         frigo.setId_utilisateur(frigoDtoReceive.getId_utilisateur());
+        frigo.setNom(frigoDtoReceive.getNom());
 
         return frigoMapperFrigoDTOSend(frigoRepository.save(frigo));
     }

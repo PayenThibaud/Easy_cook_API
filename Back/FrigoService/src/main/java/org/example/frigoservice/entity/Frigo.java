@@ -18,5 +18,6 @@ public class Frigo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_frigo;
     private int id_utilisateur;
+    private String nom;
 }
 

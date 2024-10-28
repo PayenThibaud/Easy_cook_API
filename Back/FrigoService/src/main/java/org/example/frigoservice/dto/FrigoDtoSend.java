@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class FrigoDtoSend {
     private int id_frigo;
     private int id_utilisateur;
+    private String nom;
 }
