@@ -1,4 +1,4 @@
-package org.example.ingredientservice.dto;
+package org.example.ingredientservice.dto.IngredientDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

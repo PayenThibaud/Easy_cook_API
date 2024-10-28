@@ -1,15 +1,16 @@
-package org.example.ingredientservice.dto;
+package org.example.authenticationservice.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Data
-
-public class IngredientDtoReceive {
-    private String nom;
+public class LoginRequestDto {
+    private String email;
+    private String password;
 }
+
