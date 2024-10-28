@@ -11,42 +11,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/recettes")
+@RequestMapping("/recettes")
 public class RecetteController {
     @Autowired
     private RecetteService recetteService;
 
-    @PostMapping
-    public ResponseEntity<Recette> addRecipe(@RequestBody Recette recette) {
-        Recette newRecipe = recetteService.addRecipe(recette);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newRecipe);
+    @GetMapping("/{id}")
+    public ResponseEntity<RecetteDtoSend> getById(@PathVariable int id) {
+        return ResponseEntity.ok(recetteService.getById(id));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Recette> updateRecipe(@PathVariable Long id, @RequestBody Recette recetteDetails) {
-        Recette updatedRecipe = recetteService.updateRecipe(id, recetteDetails);
-        return ResponseEntity.ok(updatedRecipe);
+    @GetMapping
+    public ResponseEntity<List<RecetteDtoSend>> getAll() {
+        return ResponseEntity.ok(recetteService.getAll());
+    }
+
+    @PostMapping
+    public ResponseEntity<RecetteDtoSend> create(@RequestBody RecetteDtoReceive recetteDtoReceive) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(recetteService.save(recetteDtoReceive));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRecipe(@PathVariable Long id) {
-        recetteService.deleteRecipe(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> delete(@PathVariable int id) {
+        recetteService.delete(id);
+        return ResponseEntity.ok("Recette supprimée");
     }
 
-    @GetMapping("/all")
-    public List<Recette> getAllRecipes() {
-        return recetteService.getAllRecipes();
-    }
-
-    @GetMapping("/search")
-    public List<Recette> searchRecipes(@RequestParam String keyword) {
-        return recetteService.searchRecipes(keyword);
-    }
-
-    @PostMapping("/by-ingredients")
-    public ResponseEntity<List<Recette>> getRecipesByIngredients(@RequestBody List<Ingredient> ingredients) {
-        List<Recette> recettes = recetteService.getRecipesByIngredients(ingredients);
-        return ResponseEntity.ok(recettes);
+    @PutMapping("/{id}")
+    public ResponseEntity<RecetteDtoSend> update(@PathVariable int id, @RequestBody RecetteDtoReceive recetteDtoReceive) {
+        return ResponseEntity.ok(recetteService.update(id, recetteDtoReceive));
     }
 }

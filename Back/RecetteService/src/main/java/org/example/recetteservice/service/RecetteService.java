@@ -8,44 +8,74 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class RecetteService {
+
     @Autowired
     private RecetteRepository recetteRepository;
 
-    public Recette addRecipe(Recette recette) {
-        return recetteRepository.save(recette);
+    public RecetteDtoSend getById(int id) {
+        Recette recette = recetteRepository.findById(id).orElseThrow();
+        return mapToDtoSend(recette);
     }
 
-    public Recette updateRecipe(Long id, Recette recetteDetails) {
-        Recette recette = recetteRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Recette not found for this id :: " + id));
-        recette.setNom(recetteDetails.getNom());
-        recette.setDescription(recetteDetails.getDescription());
-        recette.setCalories(recetteDetails.getCalories());
-        recette.setIngredients(recetteDetails.getIngredients());
-        recette.setIsVisible(recetteDetails.getIsVisible());
-        return recetteRepository.save(recette);
+    public List<RecetteDtoSend> getAll() {
+        return StreamSupport.stream(recetteRepository.findAll().spliterator(), false)
+                .map(this::mapToDtoSend)
+                .collect(Collectors.toList());
     }
 
-    public void deleteRecipe(Long id) {
-        Recette recette = recetteRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Recette not found for this id :: " + id));
-        recetteRepository.delete(recette);
+    public RecetteDtoSend save(RecetteDtoReceive recetteDtoReceive) {
+        Recette recette = mapToEntity(recetteDtoReceive);
+        recette = recetteRepository.save(recette);
+        return mapToDtoSend(recette);
     }
 
-    public List<Recette> getAllRecipes() {
-        return recetteRepository.findAll(); // Récupérer toutes les recettes
+    public void delete(int id) {
+        recetteRepository.deleteById(id);
     }
 
-    public List<Recette> searchRecipes(String keyword) {
-        return recetteRepository.findByNomContainingIgnoreCaseOrDescriptionContainingIgnoreCase(keyword, keyword);
+    public RecetteDtoSend update(int id, RecetteDtoReceive recetteDtoReceive) {
+        Recette recette = recetteRepository.findById(id).orElseThrow();
+        recette.setNom(recetteDtoReceive.getNom());
+        recette.setDescription(recetteDtoReceive.getDescription());
+        recette.setTempsPreparation(recetteDtoReceive.getTempsPreparation());
+        recette.setNombreCalories(recetteDtoReceive.getNombreCalories());
+        recette.setIngredients(recetteDtoReceive.getIngredients());
+        recette.setRegime(recetteDtoReceive.getRegime());
+        recette.setCout(recetteDtoReceive.getCout());
+        recette.setIsVisible(recetteDtoReceive.getIsVisible());
+        recette = recetteRepository.save(recette);
+        return mapToDtoSend(recette);
     }
 
-    public List<Recette> getRecipesByIngredients(List<Ingredient> ingredients) {
-        return recetteRepository.findByIngredientsIn(ingredients);
+    private RecetteDtoSend mapToDtoSend(Recette recette) {
+        return RecetteDtoSend.builder()
+                .id_recette(recette.getId_recette())
+                .nom(recette.getNom())
+                .description(recette.getDescription())
+                .tempsPreparation(recette.getTempsPreparation())
+                .nombreCalories(recette.getNombreCalories())
+                .ingredients(recette.getIngredients())
+                .regime(recette.getRegime())
+                .cout(recette.getCout())
+                .isVisible(recette.getIsVisible())
+                .build();
     }
 
-
+    private Recette mapToEntity(RecetteDtoReceive recetteDtoReceive) {
+        return Recette.builder()
+                .nom(recetteDtoReceive.getNom())
+                .description(recetteDtoReceive.getDescription())
+                .tempsPreparation(recetteDtoReceive.getTempsPreparation())
+                .nombreCalories(recetteDtoReceive.getNombreCalories())
+                .ingredients(recetteDtoReceive.getIngredients())
+                .regime(recetteDtoReceive.getRegime())
+                .cout(recetteDtoReceive.getCout())
+                .isVisible(recetteDtoReceive.getIsVisible())
+                .build();
+    }
 }
