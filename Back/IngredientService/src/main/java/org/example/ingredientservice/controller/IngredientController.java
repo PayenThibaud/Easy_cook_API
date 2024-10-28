@@ -43,9 +43,4 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientService.update(id, ingredientDtoReceive));
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<ProductDto>> search(@RequestParam String name) {
-        List<ProductDto> products = ingredientService.searchProductsByName(name);
-        return ResponseEntity.ok(products);
-    }
 }
