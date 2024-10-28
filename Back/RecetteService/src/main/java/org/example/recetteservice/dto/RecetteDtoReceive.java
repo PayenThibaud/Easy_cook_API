@@ -1,23 +1,15 @@
-package org.example.recetteservice.entity;
+package org.example.recetteservice.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-
-public class Recette {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RecetteDtoReceive {
     private int id_recette;
     private String nom;
     private String description;
@@ -27,8 +19,4 @@ public class Recette {
     private String regime;
     private double cout;
     private Boolean isVisible;
-
-    @ManyToMany
-    private List<Ingredient> ingredients;
-
 }

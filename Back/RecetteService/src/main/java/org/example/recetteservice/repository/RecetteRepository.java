@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UtilisateurRepository extends JpaRepository<Recette, Long> {
+public interface RecetteRepository extends CrudRepository<Recette, Integer> {
     List<Recette> findByIngredientsIn(List<Ingredient> ingredients);
     List<Recette> findByNomContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String nom, String description);
 }
