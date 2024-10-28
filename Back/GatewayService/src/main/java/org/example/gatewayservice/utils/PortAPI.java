@@ -7,4 +7,5 @@ public class PortAPI {
     public static String portFrigo = "8084";
     public static String portAuth = "8085";
     public static String portContrainteAlim = "8086";
+    public static String portFrigoAlim = "8087";
 }
