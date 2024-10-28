@@ -5,10 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
-public class ContrainteDTOReceive {
-    private String nom;
+public class PrefAlimUserDTOReceive {
+    private int contrainteAlimentaireId;
+    private int utilisateurId;
 }
