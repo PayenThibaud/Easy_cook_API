@@ -76,7 +76,7 @@ public class RecetteService {
                 .ingredients(recetteDtoReceive.getIngredients())
                 .cout(recetteDtoReceive.getCout())
                 .isVisible(recetteDtoReceive.getIsVisible())
-                .isFavorite(recette.getIsFavorite())
+                .isFavorite(recetteDtoReceive.getIsFavorite())
                 .build();
     }
 

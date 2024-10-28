@@ -1,5 +1,6 @@
 package org.example.recetteservice.controller;
 
+import org.example.recetteservice.entity.Recette;
 import org.example.recetteservice.dto.RecetteDtoReceive;
 import org.example.recetteservice.dto.RecetteDtoSend;
 import org.example.recetteservice.service.RecetteService;
