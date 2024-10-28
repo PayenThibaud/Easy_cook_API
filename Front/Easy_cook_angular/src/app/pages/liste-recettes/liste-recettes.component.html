@@ -1,0 +1,10 @@
+<section class="flex gap-4 mt-4 justify-center p-8">
+
+    <div class="h-56 grid grid-cols-3 gap-4 content-start">
+        @for(recette of recettes; track recette) {
+            <app-recette-card [recette] = "recette"/>
+        } @empty {
+            <p>Il n'y a pas de recette disponible.</p>
+        }
+    </div>
+</section>
