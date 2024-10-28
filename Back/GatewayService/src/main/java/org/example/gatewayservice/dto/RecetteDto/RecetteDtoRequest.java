@@ -12,7 +12,7 @@ public class RecetteDtoRequest {
     private String description;
     private int tempsPreparation;
     private int nombreCalories;
-    private String ingredients;
+    private List<Integer> ingredients;
     private String regime;
     private double cout;
     private Boolean isVisible;

@@ -23,7 +23,6 @@ public class Recette {
     private String description;
     private int tempsPreparation;
     private int nombreCalories;
-    private String ingredients;
     private String regime;
     private double cout;
     private Boolean isVisible;
