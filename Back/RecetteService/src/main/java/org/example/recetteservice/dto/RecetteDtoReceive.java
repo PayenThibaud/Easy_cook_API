@@ -16,7 +16,7 @@ public class RecetteDtoReceive {
     private int tempsPreparation;
     private int nombreCalories;
     private List<Integer> ingredients;
-    private String regime;
     private double cout;
     private Boolean isVisible;
+    private Boolean isFavorite;
 }

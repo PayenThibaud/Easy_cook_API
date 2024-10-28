@@ -23,11 +23,16 @@ public class Recette {
     private String description;
     private int tempsPreparation;
     private int nombreCalories;
-    private String regime;
     private double cout;
     private Boolean isVisible;
+    private Boolean isFavorite;
 
     @ManyToMany
+    @JoinTable(
+            name = "recette_ingredient",
+            joinColumns = @JoinColumn(name = "recette_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
     private List<Ingredient> ingredients;
 
 }
