@@ -9,6 +9,7 @@ import org.example.authenticationservice.exception.UserAlreadyExistException;
 import org.example.authenticationservice.security.JWTGenerator;
 import org.example.authenticationservice.exception.NotFoundException;
 import org.example.authenticationservice.service.UserAppService;
+import org.example.authenticationservice.utils.enums.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -50,6 +51,6 @@ public class UserAppController {
     public ResponseEntity<RegisterResponseDto> register(@RequestBody RegisterRequestDto registerRequestDTO) throws UserAlreadyExistException {
         registerRequestDTO.setPassword(passwordEncoder.encode(registerRequestDTO.getPassword()));
         UserApp userApp = userAppService.enregistrerUtilisateur(registerRequestDTO);
-        return ResponseEntity.ok(RegisterResponseDto.builder().id(userApp.getId_user()).email(userApp.getEmail()).lastname(userApp.getLastname()).firstname(userApp.getFirstname()).phone(userApp.getPhone()).role(userApp.getRole().ordinal()).build());
+        return ResponseEntity.ok(RegisterResponseDto.builder().id(userApp.getId_user()).pseudo(userApp.getPseudo()).email(userApp.getEmail()).password(userApp.getPassword()).role(userApp.getRole().ordinal()).build());
     }
 }

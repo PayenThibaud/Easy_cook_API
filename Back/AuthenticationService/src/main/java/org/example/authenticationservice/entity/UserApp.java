@@ -11,6 +11,7 @@ import org.example.authenticationservice.utils.enums.Role;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserApp {
 
     @Id
@@ -18,18 +19,14 @@ public class UserApp {
     private int id_user;
 
     @Column(unique = true)
+    private String pseudo;
     private String email;
-    private String lastname;
-    private String firstname;
-    private String phone;
     private String password;
     private Role role;
 
-    public UserApp(String email, String lastname, String firstname, String phone, String password,int role) {
+    public UserApp(String pseudo, String email, String password,int role) {
+        this.pseudo = pseudo;
         this.email = email;
-        this.lastname = lastname;
-        this.firstname = firstname;
-        this.phone = phone;
         this.password = password;
         this.role = role == 0 ? Role.USER : Role.ADMIN;
     }

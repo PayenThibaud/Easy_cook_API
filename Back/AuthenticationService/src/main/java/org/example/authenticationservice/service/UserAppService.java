@@ -21,7 +21,7 @@ public class UserAppService {
     public UserApp enregistrerUtilisateur(RegisterRequestDto registerRequestDto) throws UserAlreadyExistException {
         Optional<UserApp> userAppOptional = userRepository.findByEmail(registerRequestDto.getEmail());
         if(userAppOptional.isEmpty()){
-            UserApp user = new UserApp(registerRequestDto.getEmail(), registerRequestDto.getLastname(), registerRequestDto.getFirstname(), registerRequestDto.getPhone(), registerRequestDto.getPassword(),0);
+            UserApp user = new UserApp(registerRequestDto.getPseudo(), registerRequestDto.getEmail(), registerRequestDto.getPassword(), registerRequestDto.getRole());
             return userRepository.save(user);
         }
         throw new UserAlreadyExistException();

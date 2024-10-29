@@ -11,10 +11,8 @@ import org.example.authenticationservice.utils.enums.Role;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterRequestDto {
+    private String pseudo;
     private String email;
-    private String lastname;
-    private String firstname;
-    private String phone;
     private String password;
     private int role;
 }
