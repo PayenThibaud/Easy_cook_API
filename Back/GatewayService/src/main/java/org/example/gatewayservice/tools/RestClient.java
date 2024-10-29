@@ -1,11 +1,14 @@
 package org.example.gatewayservice.tools;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 
 public class RestClient<T> {
@@ -19,17 +22,34 @@ public class RestClient<T> {
         httpHeaders = new HttpHeaders();
         httpHeaders.add("Accept", "*/*");
         httpHeaders.add("content-type", "application/json");
+
     }
 
     public boolean testToken(String token, Class<T> type) {
-        httpHeaders.add("Authorization", token);
+        httpHeaders.clear();
+        httpHeaders.add("Accept", "*/*");
+        httpHeaders.add("Content-Type", "application/json");
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String tokenVerif = (String) session.getAttribute("token");
+
+        if (tokenVerif == null) {
+            System.out.println("Le token de la session est null.");
+            return false;
+        }
+
+        httpHeaders.add("Authorization", "Bearer " + tokenVerif);
+
+
         HttpEntity<String> requestEntity = new HttpEntity<>("", httpHeaders);
         ResponseEntity<T> response = template.exchange(urlApi, HttpMethod.GET, requestEntity, type);
-        if(response.hasBody()) {
-            return response.getStatusCode().is2xxSuccessful();
-        }
-        return false;
+
+        return response.hasBody() && response.getStatusCode().is2xxSuccessful();
     }
+
+
+
 
     public T postRequest(String json, Class<T> type) {
         HttpEntity<String> requestEntity = new HttpEntity<>(json,httpHeaders);
@@ -58,5 +78,4 @@ public class RestClient<T> {
         HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
         template.exchange(urlApi, HttpMethod.DELETE, requestEntity, Void.class);
     }
-
 }

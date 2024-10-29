@@ -1,12 +1,19 @@
 package org.example.ingredientservice.service;
 
-import org.example.ingredientservice.dto.IngredientDtoReceive;
-import org.example.ingredientservice.dto.IngredientDtoSend;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.ingredientservice.dto.IngredientDto.IngredientDtoReceive;
+import org.example.ingredientservice.dto.IngredientDto.IngredientDtoSend;
+import org.example.ingredientservice.dto.ProductDto.OpenFoodFactsResponse;
+import org.example.ingredientservice.dto.ProductDto.ProductDto;
 import org.example.ingredientservice.entity.Ingredient;
 import org.example.ingredientservice.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -59,4 +66,5 @@ public class IngredientService {
     }
 
     public void delete(int id) { ingredientRepository.deleteById(id); }
+
 }

@@ -1,4 +1,4 @@
-package org.example.ingredientservice.dto;
+package org.example.ingredientservice.dto.IngredientDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 
-public class IngredientDtoReceive {
+public class IngredientDtoSend {
+    private int id_ingredient;
     private String nom;
 }

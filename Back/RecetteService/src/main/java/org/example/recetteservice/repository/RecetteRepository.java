@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecetteRepository extends CrudRepository<Recette, Integer> {
-    List<Recette> findByIngredientsIn(List<Ingredient> ingredients);
-    List<Recette> findByNomContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String nom, String description);
 }

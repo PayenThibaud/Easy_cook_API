@@ -1,4 +1,4 @@
-package org.example.ingredientservice.dto;
+package org.example.authenticationservice.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Data
-
-public class IngredientDtoSend {
-    private int id_ingredient;
-    private String nom;
+@Builder
+public class LoginResponseDto {
+    private String token;
 }

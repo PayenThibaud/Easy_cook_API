@@ -17,8 +17,7 @@ public class PrefAlimUserService {
 
     @Autowired
     private PrefAlimUserRepository prefAlimUserRepository;
-    @Autowired
-    private ContrainteService contrainteService;
+
 
     public PrefAlimUserService(PrefAlimUserRepository prefAlimUserRepository) {
         this.prefAlimUserRepository = prefAlimUserRepository;
@@ -32,36 +31,29 @@ public class PrefAlimUserService {
                 .build();
     }
 
-    private ContrainteAlimentaire mapDtoToEntity(ContrainteDTOSend dto) {
-        return ContrainteAlimentaire.builder()
-                .id_ContraiteAlimentaire(dto.getId_ContraiteAlimentaire())
-                .nom(dto.getNom())
-                .build();
-    }
-    private PrefAlimUser mapToEntity(PrefAlimUserDTOReceive prefAlimUserDTOReceive) {
-        return PrefAlimUser.builder()
-                .utilisateurId(prefAlimUserDTOReceive.getUtilisateurId())
-                .contrainteAlimentaireId(prefAlimUserDTOReceive.getContrainteAlimentaireId())
-                .build();
-    }
-
     private List<PrefAlimUserDTOSend> mapToDTOList(List<PrefAlimUser> prefAlimUsers) {
         return prefAlimUsers.stream().map(this::mapToDTO).toList();
     }
 
-    public PrefAlimUserDTOSend getById(int id) {
-        return mapToDTO(prefAlimUserRepository.findById(id).orElseThrow());
+    public PrefAlimUserDTOSend createPrefAlimUser(PrefAlimUserDTOReceive prefAlimUserDTOReceive) {
+        PrefAlimUser newPrefAlimUser = PrefAlimUser.builder()
+                .utilisateurId(prefAlimUserDTOReceive.getUtilisateurId())
+                .contrainteAlimentaireId(prefAlimUserDTOReceive.getContrainteAlimentaireId())
+                .build();
+        PrefAlimUser savedPrefAlimUser = prefAlimUserRepository.save(newPrefAlimUser);
+        return mapToDTO(savedPrefAlimUser);
+    }
+
+
+    public List<PrefAlimUserDTOSend> getByIdUser(int id) {
+        return mapToDTOList((List<PrefAlimUser>)prefAlimUserRepository.findAllByUtilisateurId(id));
     }
 
     public List<PrefAlimUserDTOSend> getAll() {
         return mapToDTOList((List<PrefAlimUser>) prefAlimUserRepository.findAll());
     }
 
-    public PrefAlimUserDTOSend createPrefAlimUser(PrefAlimUserDTOReceive prefAlimUserDTOReceive) {
-        PrefAlimUser newPrefAlimUser = mapToEntity(prefAlimUserDTOReceive);
-        PrefAlimUser savedPrefAlimUser = prefAlimUserRepository.save(newPrefAlimUser);
-        return mapToDTO(savedPrefAlimUser);
-    }
+
 
     @Transactional
     public void deleteAllByUserId(int userId) {
@@ -71,4 +63,6 @@ public class PrefAlimUserService {
             prefAlimUserRepository.delete(prefAlimUser);
         }
     }
+
+    //READ PAR ID_USER
 }

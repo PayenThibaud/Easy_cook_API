@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.utilisateurservice.utils.enums.Role;
 
 @Entity
 @NoArgsConstructor
@@ -16,12 +17,15 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class Utilisateur {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_utilisateur;
-    private String nom;
-    private String email;
-    private String password;
-    private int phone;
-    private boolean isAdmin = false;
-}
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int id_utilisateur;
+
+        private String nom;
+        private String email;
+        private String password;
+        private int phone;
+
+        private Role role;
+
+    }

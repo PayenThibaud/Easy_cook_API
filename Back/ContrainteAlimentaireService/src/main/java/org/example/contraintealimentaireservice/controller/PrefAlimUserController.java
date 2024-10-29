@@ -2,7 +2,6 @@ package org.example.contraintealimentaireservice.controller;
 
 import org.example.contraintealimentaireservice.dto.PrefAlimUserDTOReceive;
 import org.example.contraintealimentaireservice.dto.PrefAlimUserDTOSend;
-import org.example.contraintealimentaireservice.entity.PrefAlimUser;
 import org.example.contraintealimentaireservice.service.PrefAlimUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +23,8 @@ public class PrefAlimUserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PrefAlimUserDTOSend> getById(@PathVariable int id) {
-        return ResponseEntity.ok(prefAlimUserService.getById(id));
+    public ResponseEntity<List<PrefAlimUserDTOSend>>getById(@PathVariable int id) {
+        return ResponseEntity.ok(prefAlimUserService.getByIdUser(id));
     }
 
     @PostMapping
@@ -34,7 +33,7 @@ public class PrefAlimUserController {
         return new ResponseEntity<>(createdPrefAlimUser, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/user/{userId}")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deletePrefAlimByUserId(@PathVariable int userId) {
         prefAlimUserService.deleteAllByUserId(userId);
         return ResponseEntity.noContent().build();
