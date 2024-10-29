@@ -48,4 +48,15 @@ public class RestClient<T> {
         return null;
     }
 
+    public T putRequest(String json, Class<T> type) {
+        HttpEntity<String> requestEntity = new HttpEntity<>(json, httpHeaders);
+        ResponseEntity<T> response = template.exchange(urlApi, HttpMethod.PUT, requestEntity, type);
+        return response.hasBody() ? response.getBody() : null;
+    }
+
+    public void deleteRequest() {
+        HttpEntity<String> requestEntity = new HttpEntity<>(httpHeaders);
+        template.exchange(urlApi, HttpMethod.DELETE, requestEntity, Void.class);
+    }
+
 }
