@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class ListeIngredientsRecetteDtoReceive {
-    private int ingredientIds;
-    private int regimeIds;
+    private int id_aliment;
+    private int id_recette;
     private double quantite;
+    private Boolean unitegramme;
 }
