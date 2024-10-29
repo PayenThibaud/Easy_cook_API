@@ -8,26 +8,29 @@ import lombok.NoArgsConstructor;
 import org.example.authenticationservice.utils.enums.Role;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Data
-public class UtilisateurApp {
+public class UserApp {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_utilisateurApp;
+    private int id_user;
 
-    private String nom;
+    @Column(unique = true)
     private String email;
+    private String lastname;
+    private String firstname;
+    private String phone;
     private String password;
-    private int phone;
     private Role role;
 
-    public UtilisateurApp(String email, String lastname, int phone, String password,int role) {
-        this.nom = lastname;
+    public UserApp(String email, String lastname, String firstname, String phone, String password,int role) {
         this.email = email;
-        this.password = password;
+        this.lastname = lastname;
+        this.firstname = firstname;
         this.phone = phone;
+        this.password = password;
         this.role = role == 0 ? Role.USER : Role.ADMIN;
     }
 }

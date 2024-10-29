@@ -4,6 +4,7 @@ import org.example.utilisateurservice.dto.UtilisateurDtoReceive;
 import org.example.utilisateurservice.dto.UtilisateurDtoSend;
 import org.example.utilisateurservice.entity.Utilisateur;
 import org.example.utilisateurservice.repository.UtilisateurRepository;
+import org.example.utilisateurservice.utils.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class UtilisateurService {
                 .email(utilisateur.getEmail())
                 .password(utilisateur.getPassword())
                 .phone(utilisateur.getPhone())
-                .isAdmin(utilisateur.isAdmin())
+                .role(Role.USER)
                 .build();
     }
 
@@ -54,7 +55,7 @@ public class UtilisateurService {
                 .email(utilisateurDtoReceive.getEmail())
                 .password(utilisateurDtoReceive.getPassword())
                 .phone(utilisateurDtoReceive.getPhone())
-                .isAdmin(false)
+                .role(Role.USER)
                 .build();
 
         return utilisateurMapperUtilisateurDTOSend(utilisateurRepository.save(utilisateur));
@@ -67,7 +68,7 @@ public class UtilisateurService {
         utilisateur.setEmail(utilisateurDtoReceive.getEmail());
         utilisateur.setPhone(utilisateurDtoReceive.getPhone());
         utilisateur.setPassword(utilisateurDtoReceive.getPassword());
-        utilisateur.setAdmin(false);
+        utilisateur.setRole(Role.USER);
 
         return utilisateurMapperUtilisateurDTOSend(utilisateurRepository.save(utilisateur));
     }

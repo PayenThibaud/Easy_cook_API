@@ -12,7 +12,7 @@ public class GeneralAuthExceptionHandler {
 
     @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<RegisterResponseDto> UserAlreadyExistHandler (UserAlreadyExistException ex){
-        RegisterResponseDto registerResponseDto = new RegisterResponseDto(-1,"nom","email",0,0);
+        RegisterResponseDto registerResponseDto = new RegisterResponseDto(-1,"email","lastname","firstname","phone",0);
         return new ResponseEntity<>(registerResponseDto, HttpStatus.OK);
     }
 
@@ -22,3 +22,4 @@ public class GeneralAuthExceptionHandler {
         return new ResponseEntity<>(loginResponseDto,HttpStatus.OK);
     }
 }
+

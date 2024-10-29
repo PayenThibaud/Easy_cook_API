@@ -1,7 +1,7 @@
 package org.example.authenticationservice.security;
 
-import org.example.authenticationservice.entity.UtilisateurApp;
-import org.example.authenticationservice.repository.UtilisateurAppRepository;
+import org.example.authenticationservice.entity.UserApp;
+import org.example.authenticationservice.repository.UserAppRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,16 +18,16 @@ import java.util.Set;
 
 public class CustomUserDetailService implements UserDetailsService {
 
-    private final UtilisateurAppRepository utilisateurAppRepository;
+    private final UserAppRepository userAppRepository;
 
-    public CustomUserDetailService(UtilisateurAppRepository utilisateurAppRepository) {
-        this.utilisateurAppRepository = utilisateurAppRepository;
+    public CustomUserDetailService(UserAppRepository userAppRepository) {
+        this.userAppRepository = userAppRepository;
     }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<UtilisateurApp> userAppOptional = utilisateurAppRepository.findByEmail(email);
+        Optional<UserApp> userAppOptional = userAppRepository.findByEmail(email);
         if (userAppOptional.isPresent()){
-            UtilisateurApp userApp = userAppOptional.get();
+            UserApp userApp = userAppOptional.get();
             Set<GrantedAuthority> authorities = new HashSet<>();
             authorities.add(new SimpleGrantedAuthority("user"));
             return new User(userApp.getEmail(), userApp.getPassword(),authorities);

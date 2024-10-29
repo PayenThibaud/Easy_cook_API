@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("test")
+@RequestMapping("api/test")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET})
 public class ProtectedController {
 
@@ -13,3 +13,4 @@ public class ProtectedController {
         return ResponseEntity.ok("Ok");
     }
 }
+

@@ -11,9 +11,10 @@ import org.example.authenticationservice.utils.enums.Role;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterResponseDto {
-    private int id_utilisateurApp;
-    private String nom;
+    private int id;
     private String email;
-    private int phone;
+    private String lastname;
+    private String firstname;
+    private String phone;
     private int role;
 }
