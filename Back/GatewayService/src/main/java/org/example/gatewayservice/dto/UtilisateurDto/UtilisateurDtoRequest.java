@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UtilisateurDtoRequest {
-    private String nom;
+    private String pseudo;
     private String email;
     private String password;
-    private int phone;
 }
