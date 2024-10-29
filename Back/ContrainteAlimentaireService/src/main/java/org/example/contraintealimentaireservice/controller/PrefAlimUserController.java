@@ -23,8 +23,8 @@ public class PrefAlimUserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PrefAlimUserDTOSend> getById(@PathVariable int id) {
-        return ResponseEntity.ok(prefAlimUserService.getById(id));
+    public ResponseEntity<List<PrefAlimUserDTOSend>>getById(@PathVariable int id) {
+        return ResponseEntity.ok(prefAlimUserService.getByIdUser(id));
     }
 
     @PostMapping
