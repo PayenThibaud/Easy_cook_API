@@ -15,7 +15,6 @@ public class RecetteDtoSend {
     private String description;
     private int tempsPreparation;
     private int nombreCalories;
-    private List<Integer> ingredients;
     private double cout;
     private Boolean isVisible;
     private Boolean isFavorite;
