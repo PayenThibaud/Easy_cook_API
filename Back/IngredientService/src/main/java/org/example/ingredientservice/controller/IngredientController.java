@@ -1,7 +1,8 @@
 package org.example.ingredientservice.controller;
 
-import org.example.ingredientservice.dto.IngredientDtoReceive;
-import org.example.ingredientservice.dto.IngredientDtoSend;
+import org.example.ingredientservice.dto.IngredientDto.IngredientDtoReceive;
+import org.example.ingredientservice.dto.IngredientDto.IngredientDtoSend;
+import org.example.ingredientservice.dto.ProductDto.ProductDto;
 import org.example.ingredientservice.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,4 +42,5 @@ public class IngredientController {
     public ResponseEntity<IngredientDtoSend> update(@PathVariable int id, @RequestBody IngredientDtoReceive ingredientDtoReceive) {
         return ResponseEntity.ok(ingredientService.update(id, ingredientDtoReceive));
     }
+
 }

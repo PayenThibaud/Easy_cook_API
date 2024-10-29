@@ -1,11 +1,9 @@
-package org.example.gatewayservice.controller;
+package org.example.gatewayservice.controller.loginController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.gatewayservice.dto.FrigoAlimentDto.FrigoAlimentDtoRequest;
 import org.example.gatewayservice.dto.FrigoAlimentDto.FrigoAlimentDtoResponse;
-import org.example.gatewayservice.dto.FrigoDto.FrigoDtoRequest;
-import org.example.gatewayservice.dto.FrigoDto.FrigoDtoResponse;
 import org.example.gatewayservice.tools.RestClient;
 import org.example.gatewayservice.utils.PortAPI;
 import org.springframework.http.HttpStatus;

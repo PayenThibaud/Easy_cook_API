@@ -1,4 +1,4 @@
-package org.example.gatewayservice.controller;
+package org.example.gatewayservice.controller.loginController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +34,9 @@ public class UtilisateurController {
 
     @GetMapping
     public ResponseEntity<List<UtilisateurDtoResponse>> getAllUtilisateur() {
+        // route du micro service utilisateur
         RestClient<UtilisateurDtoResponse[]> utilisateurRestClient = new RestClient<>("http://localhost:" + PortAPI.portUtilisateur + "/utilisateur");
+        // recuperation
         List<UtilisateurDtoResponse> utilisateurDtoResponses = Arrays.stream(utilisateurRestClient.getRequest(UtilisateurDtoResponse[].class)).toList();
         return new ResponseEntity<>(utilisateurDtoResponses, HttpStatus.OK);
     }

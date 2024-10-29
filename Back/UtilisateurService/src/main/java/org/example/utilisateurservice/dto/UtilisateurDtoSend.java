@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.utilisateurservice.utils.enums.Role;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +16,5 @@ public class UtilisateurDtoSend {
     private String email;
     private String password;
     private int phone;
-    private boolean isAdmin = false;
+    private Role role = Role.USER;
 }
