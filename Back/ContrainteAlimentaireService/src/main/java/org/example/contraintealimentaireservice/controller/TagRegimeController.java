@@ -25,7 +25,7 @@ public class TagRegimeController {
 
     //READ ID_contrainteAlimentaire
     @GetMapping("/{contrainteId}")
-    public ResponseEntity<List<TagRegimeDTOSend>> getTagRegimeById(@PathVariable int contrainteId) {
+    public ResponseEntity<List<TagRegimeDTOSend>> getTagRegimeByIdContrainte(@PathVariable int contrainteId) {
         return ResponseEntity.ok(tagRegimeService.getByContrainteAlimentaireId(contrainteId));
     }
 

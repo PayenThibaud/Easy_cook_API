@@ -45,8 +45,8 @@ public class PrefAlimUserService {
     }
 
 
-    public PrefAlimUserDTOSend getById(int id) {
-        return mapToDTO(prefAlimUserRepository.findById(id).orElseThrow());
+    public List<PrefAlimUserDTOSend> getByIdUser(int id) {
+        return mapToDTOList((List<PrefAlimUser>)prefAlimUserRepository.findAllByUtilisateurId(id));
     }
 
     public List<PrefAlimUserDTOSend> getAll() {

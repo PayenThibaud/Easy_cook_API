@@ -25,10 +25,10 @@ public class PrefAlimUserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PrefAlimUserDtoResponse> getPrefAlimUserById(@PathVariable int id) {
-        RestClient<PrefAlimUserDtoResponse> restClient = new RestClient<>("http://localhost:" + PortAPI.portContrainteAlim + "/prefalimuser/" + id);
-        PrefAlimUserDtoResponse prefAlimUserDtoResponse = restClient.getRequest(PrefAlimUserDtoResponse.class);
-        return new ResponseEntity<>(prefAlimUserDtoResponse, HttpStatus.OK);
+    public ResponseEntity<List<PrefAlimUserDtoResponse>> getPrefAlimUserById(@PathVariable int id) {
+        RestClient<PrefAlimUserDtoResponse[]> restClient = new RestClient<>("http://localhost:" + PortAPI.portContrainteAlim + "/prefalimuser/" + id);
+        List<PrefAlimUserDtoResponse> prefAlimUserDtoResponses = Arrays.stream(restClient.getRequest(PrefAlimUserDtoResponse[].class)).toList();
+        return new ResponseEntity<>(prefAlimUserDtoResponses, HttpStatus.OK);
     }
 
     @GetMapping
@@ -45,9 +45,9 @@ public class PrefAlimUserController {
         return new ResponseEntity<>(createdPrefAlimUser, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("utilisateur/{utilisateurId}")
+    @DeleteMapping("/{utilisateurid}")
     public ResponseEntity<Void> deletePrefAlimByUserId(@PathVariable int utilisateurId) {
-        RestClient<Void> restClient = new RestClient<>("http://localhost:" + PortAPI.portContrainteAlim + "/prefalimuser/user/" + utilisateurId);
+        RestClient<Void> restClient = new RestClient<>("http://localhost:" + PortAPI.portContrainteAlim + "/prefalimuser/" + utilisateurId);
         restClient.deleteRequest();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
