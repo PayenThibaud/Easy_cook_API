@@ -10,10 +10,10 @@ import org.example.authenticationservice.utils.enums.Role;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterResponseDto {
-    private int id;
+public class UtilisateurDtoSend {
+    private int id_utilisateur;
     private String pseudo;
     private String email;
     private String password;
-    private int role;
+    private Role role = Role.USER;
 }
