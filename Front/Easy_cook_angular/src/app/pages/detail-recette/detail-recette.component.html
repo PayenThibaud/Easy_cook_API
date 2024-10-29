@@ -31,12 +31,12 @@
     </ul>
 
     <h1>Etapes :</h1>
+    
     <ul>
         @for(etape of recipe.etapes; track etape; let i = $index) {
             <li>{{ i + 1 }} - {{ etape }}</li>
         }
     </ul>
-
     <img [src]="recipe.image" [alt]="recipe.nom">
 
 
