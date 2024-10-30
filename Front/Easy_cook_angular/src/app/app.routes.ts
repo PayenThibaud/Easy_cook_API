@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ListeRecettesComponent } from './pages/liste-recettes/liste-recettes.component';
 import { DetailRecetteComponent } from './pages/detail-recette/detail-recette.component';
 import { FrigoComponent } from './pages/frigo/frigo.component';
+import {UtilisateurComponent} from './pages/utilisateurs/utilisateurs.component';
 import { FormulaireRecetteComponent } from './pages/formulaire-recette/formulaire-recette.component';
 import { ProfilComponent } from './pages/profil/profil.component';
 
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path: "recettes", component: ListeRecettesComponent},
     {path: "recette", component: DetailRecetteComponent}, // à adapter en fonction de l'ID recette
     {path: "frigo", component: FrigoComponent},
+    {path: "utilisateurs", component: UtilisateurComponent},
     {path: "create-recipe", component: FormulaireRecetteComponent},
     {path: "profil", component: ProfilComponent}
 ];

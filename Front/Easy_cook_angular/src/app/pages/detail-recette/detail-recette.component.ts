@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ListeRecettesComponent } from '../liste-recettes/liste-recettes.component';
-import { Recette } from '../../components/utils/types/recette.type';
+import { Recette } from '../../utils/types/recette.type';
 import { RouterLink } from '@angular/router';
 
 @Component({

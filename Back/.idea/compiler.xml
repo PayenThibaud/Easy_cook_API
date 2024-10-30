@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="FrigoService" />
+        <module name="AdminService" />
+        <module name="RecetteService" />
+        <module name="ContrainteAlimentaireService" />
+        <module name="IngredientService" />
+        <module name="UtilisateurService" />
+        <module name="AuthenticationService" />
+        <module name="GatewayService" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AdminService" options="-parameters" />
+      <module name="AuthenticationService" options="-parameters" />
+      <module name="ContrainteAlimentaireService" options="-parameters" />
+      <module name="FrigoService" options="-parameters" />
+      <module name="GatewayService" options="-parameters" />
+      <module name="IngredientService" options="-parameters" />
+      <module name="RecetteService" options="-parameters" />
+      <module name="UtilisateurService" options="-parameters" />
+    </option>
+  </component>
+</project>
