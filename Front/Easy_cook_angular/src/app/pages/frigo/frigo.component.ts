@@ -42,6 +42,11 @@ export class FrigoComponent {
 
   isSubmitted: boolean = false;
 
+  getIngredientQuantity(ingredientId: number): number | string {
+    const frigoAliment = this.frigo.find(aliment => aliment.id_aliment === ingredientId);
+    return frigoAliment ? frigoAliment.nombreAliment : 'N/A'; // 'N/A' si aucun aliment correspondant n'est trouvé
+  }
+  
   conversionToIngredient(frigoAliment_id: number): Observable<Ingredient> {
     return this.ingredientService.getIngredient(frigoAliment_id).pipe(
       catchError((error) => {
@@ -84,23 +89,23 @@ export class FrigoComponent {
           allergens: "",
           barcode: Number(productInfo.code) || 0,
         };
-        console.log(newIngredient);
+        // console.log(newIngredient);
         this.ingredientService.postIngredient(newIngredient).subscribe(
           (dataI) => {
-            console.log(dataI);
+            // Vérifiez la valeur de nombreAliment
+            console.log('Quantité entrée:', this.alimentFrigo.nombreAliment);
             const newIngredientFrigo: FrigoAliment = {
               id_frigoAliment: 1,
               id_aliment: dataI.id_ingredient,
-              nombreAliment: this.alimentFrigo.nombreAliment,
+              nombreAliment: this.alimentFrigo.nombreAliment,  // Corrigez ici
               id_frigo: 1,
             };
             console.log(newIngredientFrigo);
 
             this.frigo_ingredientService.postFrigoIngredient(newIngredientFrigo).subscribe(
               (dataF: FrigoAliment) => {
-                // newingredienList = 
-                // this.listIngredients.push(dataI); // Ajouter seulement après sauvegarde
-                console.log('Nouvel ingrédient ajouté au frigo:', dataF);
+                this.listIngredients.push(dataI); // Ajouter seulement après sauvegarde
+                console.log('Nouvel ingrédient ajouté a listIngredient:', this.listIngredients);
               },
               (error) => {
                 console.error('Error saving ingredient in fridge:', error);
@@ -119,6 +124,24 @@ export class FrigoComponent {
   }
 
   removeIngredient(index: number): void {
-    this.listIngredients = this.listIngredients.filter((_, i) => i !== index);
+    const ingredientToRemove = this.listIngredients[index];
+    const frigoAliment = this.frigo.find(aliment => aliment.id_aliment === ingredientToRemove.id_ingredient);
+  
+    if (frigoAliment) {
+      this.frigo_ingredientService.deleteFrigoIngredient(frigoAliment.id_frigoAliment).subscribe(
+        () => {
+          // Mise à jour de `listIngredients` et `frigo` après la suppression
+          this.listIngredients = this.listIngredients.filter((_, i) => i !== index);
+          this.frigo = this.frigo.filter(aliment => aliment.id_frigoAliment !== frigoAliment.id_frigoAliment);
+          console.log(`Ingredient ${ingredientToRemove.nom} supprimé avec succès`);
+        },
+        (error) => {
+          console.error('Error deleting ingredient from fridge:', error);
+        }
+      );
+    } else {
+      console.warn("L'ingrédient à supprimer n'a pas été trouvé dans le frigo.");
+    }
   }
+  
 }

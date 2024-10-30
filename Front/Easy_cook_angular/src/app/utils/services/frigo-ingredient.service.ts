@@ -36,6 +36,16 @@ export class FrigoIngredientService {
     )
   }
 
+
+  deleteFrigoIngredient(frigoIngredientId: number): Observable<string> {
+    return this.http.delete(`${this.serviceFrigo_ingredient_url}/${frigoIngredientId}`, { responseType: 'text' }).pipe(
+        catchError(error => {
+            console.error('Error:', error);
+            alert(error.message);
+            return of(''); // Retourne une chaîne vide en cas d'erreur
+        })
+    );
+}
   
 
 }

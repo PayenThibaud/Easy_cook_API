@@ -21,6 +21,7 @@
             <tr>
                 <th scope="col" class="px-6 py-3">Nom de l'ingrédient</th>
                 <th scope="col" class="px-6 py-3">Quantité(s)</th>
+                <th scope="col" class="px-6 py-3">calories</th>
                 <th scope="col" class="px-6 py-3">Modifier</th>
                 <th scope="col" class="px-6 py-3">Supprimer</th>
             </tr>
@@ -30,7 +31,8 @@
                 @for(ingredient of listIngredients; track ingredient; let i = $index ){
             <tr  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ ingredient.nom }}</td>
-                <td class="px-6 py-4">1</td>
+                <td class="px-6 py-4">{{ getIngredientQuantity(ingredient.id_ingredient) }}</td>
+                <td class="px-6 py-4">{{ ingredient.calories }}</td>
                 <td class="px-6 py-4"><button>Modifier</button></td>
                 <td class="px-6 py-4"><button (click)="removeIngredient(i)">Supprimer</button></td>
             </tr>}

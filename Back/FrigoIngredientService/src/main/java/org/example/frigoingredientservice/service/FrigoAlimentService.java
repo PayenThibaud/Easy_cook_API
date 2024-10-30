@@ -46,15 +46,14 @@ public class FrigoAlimentService {
     }
 
     public FrigoAlimentDtoSend save(FrigoAlimentDtoReceive frigoAlimentDtoReceive) {
-
         FrigoAliment frigoAliment = FrigoAliment.builder()
                 .id_frigo(frigoAlimentDtoReceive.getId_frigo())
                 .id_aliment(frigoAlimentDtoReceive.getId_aliment())
                 .nombreAliment(frigoAlimentDtoReceive.getNombreAliment())
                 .build();
-
         return frigoAlimentMapperFrigoAlimentDTOSend(frigoAlimentRepository.save(frigoAliment));
     }
+
 
     public FrigoAlimentDtoSend update(int id, FrigoAlimentDtoReceive frigoAlimentDtoReceive) {
         FrigoAliment frigoAliment = findById(id);
