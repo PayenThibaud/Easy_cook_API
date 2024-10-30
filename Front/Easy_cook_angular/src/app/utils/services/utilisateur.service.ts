@@ -1,15 +1,18 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
-import { Utilisateur } from '../types/utilisateur.type';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {catchError, Observable, of, throwError} from 'rxjs';
+import {Utilisateur} from '../types/utilisateur.type';
+import {LoginRequestDto} from '../types/LoginRequestDto';
+import {LoginResponseDto} from '../types/LoginResponseDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilisateurService {
-  private api_url: string = "http://localhost:8085/api/auth";
+  private api_url: string = "http://localhost:8080/api/auth";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getAllUtilisateurs(): Observable<Utilisateur[]> {
     return this.http.get<Utilisateur[]>(this.api_url).pipe(
@@ -28,4 +31,13 @@ export class UtilisateurService {
       })
     );
   }
+
+  login(utilisateur: { email: string; password: string }) {
+    return this.http.post(`${this.api_url}/login`, utilisateur).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error('Erreur lors de la connexion'));
+      })
+    );
+  }
 }
+

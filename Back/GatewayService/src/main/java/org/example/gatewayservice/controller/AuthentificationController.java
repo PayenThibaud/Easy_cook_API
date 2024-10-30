@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/auth")
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class AuthentificationController {
 
     private ObjectMapper om;
