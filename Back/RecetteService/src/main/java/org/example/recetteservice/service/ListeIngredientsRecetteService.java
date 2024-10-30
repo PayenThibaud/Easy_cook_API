@@ -15,11 +15,11 @@ import java.util.stream.StreamSupport;
 public class ListeIngredientsRecetteService {
 
     @Autowired
-    private ListeIngredientsRecetteRepository listeIngredientsRecetteRepository; // Modification ici
+    private ListeIngredientsRecetteRepository listeIngredientsRecetteRepository;
 
     public ListeIngredientsRecetteDtoSend getById(int id) {
-        ListeIngredientsRecette listeIngredientsRecette = listeIngredientsRecetteRepository.findById(id).orElseThrow();
-        return mapToDtoSend(listeIngredientsRecette);
+        ListeIngredientsRecette ingredient = listeIngredientsRecetteRepository.findById(id).orElseThrow();
+        return mapToDtoSend(ingredient);
     }
 
     public List<ListeIngredientsRecetteDtoSend> getAll() {
@@ -29,39 +29,41 @@ public class ListeIngredientsRecetteService {
     }
 
     public ListeIngredientsRecetteDtoSend save(ListeIngredientsRecetteDtoReceive dtoReceive) {
-        ListeIngredientsRecette listeIngredientsRecette = mapToEntity(dtoReceive);
-        listeIngredientsRecette = listeIngredientsRecetteRepository.save(listeIngredientsRecette);
-        return mapToDtoSend(listeIngredientsRecette);
+        ListeIngredientsRecette ingredient = mapToEntity(dtoReceive);
+        ingredient = listeIngredientsRecetteRepository.save(ingredient);
+        return mapToDtoSend(ingredient);
     }
 
     public void delete(int id) {
         listeIngredientsRecetteRepository.deleteById(id);
     }
 
-      public ListeIngredientsRecetteDtoSend update(int id, ListeIngredientsRecetteDtoReceive dtoReceive) {
-        ListeIngredientsRecette listeIngredientsRecette = listeIngredientsRecetteRepository.findById(id).get();
-        listeIngredientsRecette.setIngredientId(dtoReceive.getIngredientIds());
-        listeIngredientsRecette.setRegimeId(dtoReceive.getRegimeIds());
-        listeIngredientsRecette.setQuantite(dtoReceive.getQuantite());
-
-        listeIngredientsRecette = listeIngredientsRecetteRepository.save(listeIngredientsRecette);
-        return mapToDtoSend(listeIngredientsRecette);
+    public ListeIngredientsRecetteDtoSend update(int id, ListeIngredientsRecetteDtoReceive dtoReceive) {
+        ListeIngredientsRecette ingredient = listeIngredientsRecetteRepository.findById(id).orElseThrow();
+        ingredient.setId_aliment(dtoReceive.getId_aliment());
+        ingredient.setId_recette(dtoReceive.getId_recette());
+        ingredient.setQuantite(dtoReceive.getQuantite());
+        ingredient.setUnitegramme(dtoReceive.getUnitegramme());
+        ingredient = listeIngredientsRecetteRepository.save(ingredient);
+        return mapToDtoSend(ingredient);
     }
 
-    private ListeIngredientsRecetteDtoSend mapToDtoSend(ListeIngredientsRecette listeIngredientsRecette) {
+    private ListeIngredientsRecetteDtoSend mapToDtoSend(ListeIngredientsRecette ingredient) {
         return ListeIngredientsRecetteDtoSend.builder()
-                .ingredientIds(listeIngredientsRecette.getIngredientId())
-                .regimeIds(listeIngredientsRecette.getRegimeId())
-                .quantite(listeIngredientsRecette.getQuantite())
+                .id_listeingredientrecette(ingredient.getId_listeingredientrecette())
+                .id_aliment(ingredient.getId_aliment())
+                .id_recette(ingredient.getId_recette())
+                .quantite(ingredient.getQuantite())
+                .unitegramme(ingredient.getUnitegramme())
                 .build();
     }
 
     private ListeIngredientsRecette mapToEntity(ListeIngredientsRecetteDtoReceive dtoReceive) {
         return ListeIngredientsRecette.builder()
-                .ingredientId(dtoReceive.getIngredientIds())
-                .regimeId(dtoReceive.getRegimeIds())
+                .id_aliment(dtoReceive.getId_aliment())
+                .id_recette(dtoReceive.getId_recette())
                 .quantite(dtoReceive.getQuantite())
+                .unitegramme(dtoReceive.getUnitegramme())
                 .build();
     }
 }
-

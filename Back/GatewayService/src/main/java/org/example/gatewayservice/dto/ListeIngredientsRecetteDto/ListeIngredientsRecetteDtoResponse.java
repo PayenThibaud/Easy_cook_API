@@ -1,4 +1,4 @@
-package org.example.recetteservice.dto;
+package org.example.gatewayservice.dto.ListeIngredientsRecetteDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
-public class ListeIngredientsRecetteDtoReceive {
+public class ListeIngredientsRecetteDtoResponse {
+    private int id_listeingredientrecette;
     private int id_aliment;
     private int id_recette;
     private double quantite;
     private Boolean unitegramme;
 }
+
