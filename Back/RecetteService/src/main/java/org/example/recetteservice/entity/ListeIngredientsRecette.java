@@ -15,14 +15,16 @@ public class ListeIngredientsRecette {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_listeingredientrecette;
 
     @Column(name = "Id_aliment")
-    private int ingredientId;
+    private int id_aliment;
 
-    @Column(name = "Id_contrainte_alimentaire")
-    private int regimeId;
+    @Column(name = "Id_recette")
+    private int id_recette;
 
     private double quantite;
+
+    private Boolean unitegramme;
 
 }
