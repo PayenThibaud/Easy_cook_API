@@ -14,8 +14,7 @@ export const routes: Routes = [
     {path: "register", component: InscriptionComponent},
     {path: "login", component: LoginComponent},
     {path: "recettes", component: ListeRecettesComponent},
-    // à adapter en fonction de l'ID recette
-    {path: "recette", component: DetailRecetteComponent},
+    {path: "recette", component: DetailRecetteComponent}, // à adapter en fonction de l'ID recette
     {path: "frigo", component: FrigoComponent},
     {path: "create-recipe", component: FormulaireRecetteComponent},
     {path: "profil", component: ProfilComponent}

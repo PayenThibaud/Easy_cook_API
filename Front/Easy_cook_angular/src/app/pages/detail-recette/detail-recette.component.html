@@ -1,43 +1,80 @@
 
 
-<div class="p-8">
-    <a routerLink="/recettes">Retour</a>
+<div class="p-6">
+    <div class="pb-6">
+        <a routerLink="/recettes" class="font-bold">Retour</a>
+    </div>
+    <div class="p-6 bg-black">
+        <h1 class="text-center text-white text-xl font-bold">{{ recipe.nom }}</h1>
+    </div>        
+    <div class="pt-8">
+        <img [src]="recipe.image" [alt]="recipe.nom" class="object-cover h-80 w-full">
+    </div>
 
-    <h1>Détail de la recette</h1>
+    <div class="pt-8">
+        <div class="bg-black">
+            <h2 class="text-center text-white text-lg font-bold border-8 border-black">Les caractéristiques</h2>
+        </div>
+        <div class="pt-4 text-center">
+            <p class="font-bold">Durée</p>
+            <p>{{ recipe.duree }} minutes</p>
+        </div>
 
-    <h2>{{ recipe.nom }}</h2>
-    <p>Durée : {{ recipe.duree }}</p>
-    <p>{{ recipe.calorie }} Calories</p>
-    <p>Régime :</p>
-    <ul>
-        @for(spec of recipe.regime; track spec) {
-            <li>{{spec}}</li>
-        } @empty {
-            <li>Pas de spécificités</li>
-        }
-    </ul>
-    <p>Auteur : {{ recipe.auteur }}</p>
+        <div class="pt-4 text-center">
+            <p class="font-bold">Calories</p>
+            <p>{{ recipe.calorie }} cal</p>
+        </div>
+        <div class="pt-4 text-center">
+            <p class="font-bold">Régime</p>
+            <ul>
+                @for(spec of recipe.regime; track spec) {
+                    <li>{{spec}}</li>
+                } @empty {
+                    <li>Pas de spécificités</li>
+                }
+            </ul>
+        </div>
+        <div class="pt-4 text-center">
+            <p class="font-bold">Auteur</p>
+            <p>{{ recipe.auteur }}</p>
+        </div>
+    </div>
 
-    <h1>Ingrédients :</h1>
-    <ul>
-        @for(ingredient of recipe.ingredients; track ingredient) {
-            @if (ingredient.gramme !== 0) {
-                <li>{{ ingredient.gramme }} gramme(s) {{ ingredient.nom }}</li>
-            }
-            @if (ingredient.litre !== 0) {
-                <li>{{ ingredient.litre }} litre(s) {{ ingredient.nom }}</li>
-            }
-        }
-    </ul>
+    <div class="pt-8">
+        <h1 class="text-center text-white text-lg font-bold border-8 border-black bg-black">Ingrédients</h1>
+        <div class="pl-6">
+            <ul class="list-inside">
+                @for(ingredient of recipe.ingredients; track ingredient) {
+                    @if (ingredient.gramme !== 0) {
+                        <div class="pt-4">
+                            <li><b>{{ ingredient.nom }} :</b> {{ ingredient.gramme }} gramme(s)</li>
+                        </div>    
+                    }
+                    @if (ingredient.litre !== 0) {
+                        <div class="pt-4">
+                            <li><b>{{ ingredient.nom }} :</b> {{ ingredient.litre }} litre(s)</li>
+                        </div>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
 
-    <h1>Etapes :</h1>
-    
-    <ul>
-        @for(etape of recipe.etapes; track etape; let i = $index) {
-            <li>{{ i + 1 }} - {{ etape }}</li>
-        }
-    </ul>
-    <img [src]="recipe.image" [alt]="recipe.nom">
+    <div class="pt-8">
+        <h1 class="text-center text-white text-lg font-bold border-8 border-black bg-black">Etapes</h1>
+        <div class="pl-6">
+            <ul>
+                @for(etape of recipe.etapes; track etape; let i = $index) {
+                    <div class="pt-4">   
+                        <li class="text-justify">{{ i + 1 }} - {{ etape }}</li>
+                    </div>
+                }
+            </ul>
+        </div>
+
+    </div>
+
+
 
 
 
