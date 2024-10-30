@@ -1,0 +1,20 @@
+<div class="space-y-4">
+  <ul *ngIf="utilisateurs.length > 0; else noUsers">
+    <li *ngFor="let utilisateur of utilisateurs" class="flex justify-between items-center p-4 bg-gray-300 rounded mb-3">
+      <span class="text-lg font-bold text-gray-700">{{ utilisateur.id_utilisateur }}</span>
+      <span class="text-lg font-bold text-gray-700">{{ utilisateur.pseudo }}</span>
+      <span class="text-lg font-bold text-gray-700">{{ utilisateur.email }}</span>
+      <span class="text-lg font-bold text-gray-700">{{ utilisateur.role }}</span>
+    </li>
+  </ul>
+  <ng-template #noUsers>
+    <p>Aucun utilisateur en cours</p>
+  </ng-template>
+
+  <form [formGroup]="utilisateurForm" (ngSubmit)="addUtilisateur()" class="space-y-2">
+    <input formControlName="pseudo" placeholder="Pseudo" class="input" required>
+    <input formControlName="email" placeholder="Email" class="input" required>
+    <input type="password" formControlName="password" placeholder="Mot de passe" class="input" required>
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Ajouter Utilisateur</button>
+  </form>
+</div>

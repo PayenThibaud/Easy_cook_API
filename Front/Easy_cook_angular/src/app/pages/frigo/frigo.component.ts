@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Utilisateur } from '../../components/utils/types/utilisateur.type';
-import { Ingredient } from '../../components/utils/types/ingredient.type';
+import { Utilisateur } from '../../utils/types/utilisateur.type';
+import { Ingredient } from '../../utils/types/ingredient.type';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -28,5 +28,5 @@ export class FrigoComponent {
       nom: "boeuf hachée"
     }
   ];
-  
+
 }
