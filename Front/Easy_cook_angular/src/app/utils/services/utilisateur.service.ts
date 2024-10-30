@@ -1,9 +1,7 @@
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {catchError, Observable, of, throwError} from 'rxjs';
 import {Utilisateur} from '../types/utilisateur.type';
-import {LoginRequestDto} from '../types/LoginRequestDto';
-import {LoginResponseDto} from '../types/LoginResponseDto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +16,7 @@ export class UtilisateurService {
     return this.http.get<Utilisateur[]>(this.api_url).pipe(
       catchError(error => {
         alert('Erreur lors de la récupération des utilisateurs : ' + error.message);
-        return of([]); // Retourne un tableau vide en cas d'erreur
+        return of([]);
       })
     );
   }
@@ -27,7 +25,7 @@ export class UtilisateurService {
     return this.http.post<Utilisateur>(`${this.api_url}/register`, utilisateur).pipe(
       catchError(error => {
         alert('Erreur lors de l\'ajout de l\'utilisateur : ' + error.message);
-        return of(null as unknown as Utilisateur); // Retourne null en cas d'erreur
+        return of(null as unknown as Utilisateur);
       })
     );
   }
@@ -36,6 +34,23 @@ export class UtilisateurService {
     return this.http.post(`${this.api_url}/login`, utilisateur).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(() => new Error('Erreur lors de la connexion'));
+      })
+    );
+  }
+
+  deleteUtilisateur(id: number): Observable<HttpResponse<void>> {
+    return this.http.delete<void>(`http://localhost:8080/api/auth/${id}`, { observe: 'response' }).pipe(
+      catchError(error => {
+        return of(null as unknown as HttpResponse<void>);
+      })
+    );
+  }
+
+  updateUtilisateur(id: number, utilisateur: Utilisateur): Observable<Utilisateur> {
+    return this.http.put<Utilisateur>(`${this.api_url}/${id}`, utilisateur).pipe(
+      catchError(error => {
+        alert('Erreur lors de la mise à jour de l\'utilisateur : ' + error.message);
+        return of(null as unknown as Utilisateur);
       })
     );
   }
