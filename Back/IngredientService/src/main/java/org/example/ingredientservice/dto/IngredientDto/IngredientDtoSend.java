@@ -13,4 +13,7 @@ import lombok.NoArgsConstructor;
 public class IngredientDtoSend {
     private int id_ingredient;
     private String nom;
+    private int calories;
+    private String allergens;
+    private long barcode;
 }

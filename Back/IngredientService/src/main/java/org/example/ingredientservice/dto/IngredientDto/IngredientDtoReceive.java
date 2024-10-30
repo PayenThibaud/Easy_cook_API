@@ -12,4 +12,7 @@ import lombok.NoArgsConstructor;
 
 public class IngredientDtoReceive {
     private String nom;
+    private int calories;
+    private String allergens;
+    private long barcode;
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/frigo-aliment")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class FrigoAlimentController {
     @Autowired
     private FrigoAlimentService frigoAlimentService;

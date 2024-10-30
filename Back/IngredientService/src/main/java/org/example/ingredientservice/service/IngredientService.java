@@ -29,6 +29,9 @@ public class IngredientService {
         return IngredientDtoSend.builder()
                 .id_ingredient(ingredient.getId_ingredient())
                 .nom(ingredient.getNom())
+                .calories(ingredient.getCalories())
+                .barcode(ingredient.getBarcode())
+                .allergens(ingredient.getAllergens())
                 .build();
     }
 
@@ -52,6 +55,9 @@ public class IngredientService {
 
         Ingredient ingredient = Ingredient.builder()
                 .nom(ingredientDtoReceive.getNom())
+                .calories(ingredientDtoReceive.getCalories())
+                .barcode(ingredientDtoReceive.getBarcode())
+                .allergens(ingredientDtoReceive.getAllergens())
                 .build();
 
         return IngredientToIngredientDtoSend(ingredientRepository.save(ingredient));

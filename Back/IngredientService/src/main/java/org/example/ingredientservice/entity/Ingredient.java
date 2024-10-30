@@ -22,5 +22,5 @@ public class Ingredient {
     private String nom;
     private int calories;
     private String allergens;
-    private String barcode;
+    private long barcode;
 }

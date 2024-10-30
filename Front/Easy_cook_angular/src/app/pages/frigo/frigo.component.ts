@@ -1,10 +1,11 @@
 // frigo.component.ts
 import { Component } from '@angular/core';
 import { FormsModule, FormControl, FormGroup } from '@angular/forms';
-import { OpenFoodFactsService } from '../../services/open-food-facts.service';
-import { Ingredient } from '../../components/utils/types/ingredient.type';
-import { FrigoAliment } from '../../components/utils/types/frigoAliment.type';
-import { FrigoIngredientService } from '../../services/frigo-ingredient.service';
+import { OpenFoodFactsService } from '../../utils/services/open-food-facts.service';
+import { Ingredient } from '../../utils/types/ingredient.type';
+import { FrigoAliment } from '../../utils/types/frigoAliment.type';
+import { FrigoIngredientService } from '../../utils/services/frigo-ingredient.service';
+import { IngredientService } from '../../utils/services/ingredient.service';
 
 
 @Component({
@@ -18,28 +19,45 @@ import { FrigoIngredientService } from '../../services/frigo-ingredient.service'
 export class FrigoComponent {
 
   listIngredients: Ingredient[] = [
-    { id: 1, nom: "carotte" },
-    { id: 2, nom: "celeri" },
-    { id: 3, nom: "boeuf hachée" }
+    // { id: 1, nom: "carotte" },
+    // { id: 2, nom: "celeri" },
+    // { id: 3, nom: "boeuf hachée" }
   ];
 
   frigo : FrigoAliment []= []
 
   constructor(private openFoodFactsService: OpenFoodFactsService, 
-    private frigo_ingredient : FrigoIngredientService) {}
+    private frigo_ingredientService : FrigoIngredientService,
+  private ingredientService : IngredientService) {}
 
   aliment: FrigoAliment = {
+    id_frigoAliment : 0,
     id_aliment: 0,
     nombreAliment: 0,
     id_frigo: 1
   }
 
+  ingredient : Ingredient = {
+    id: 0,
+    nom: "",
+    calories : 0,
+    allergens: "",
+    barcode: 0
+  }
   isSubmitted: boolean = false;
 
   ngOnInit() {
-    this.frigo_ingredient.getFrigo().subscribe((data: FrigoAliment[]) => {
+    this.frigo_ingredientService.getFrigo().subscribe((data: FrigoAliment[]) => {
       this.frigo = data;
-      console.log("Frigo data from database:", this.frigo);
+      // console.log("Frigo data from database:", this.frigo);
+      for (let i = 0; i < this.frigo.length; i++) {
+        this.ingredientService.getIngredient(this.frigo[i].id_aliment).subscribe((dataA : Ingredient) => {
+          this.ingredient =dataA
+          // console.log(dataA);
+          this.listIngredients.push(dataA)
+        })
+      }
+
     });
   }
 
@@ -54,7 +72,6 @@ export class FrigoComponent {
         console.error('Error retrieving product information:', error);
       }
     );
-    console.log(this.frigo);
 
   }
 
