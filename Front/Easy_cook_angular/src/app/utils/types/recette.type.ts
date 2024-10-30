@@ -1,3 +1,5 @@
+import { Utilisateur } from "./utilisateur.type"
+
 export type Recette = {
     id: number
     nom: string   
