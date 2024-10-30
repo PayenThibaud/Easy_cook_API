@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ListeRecettesComponent } from '../liste-recettes/liste-recettes.component';
-import { Recette } from '../../components/utils/types/recette.type';
+import { Recette } from '../../utils/types/recette.type';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -26,28 +26,28 @@ export class DetailRecetteComponent {
       },
       {
         nom: "Tomate",
-        gramme: 300,    
-        litre: 0    
+        gramme: 300,
+        litre: 0
       },
       {
         nom: "Céléri",
         gramme: 50,
-        litre: 0   
+        litre: 0
       },
       {
         nom: "Carotte",
         gramme: 200,
-        litre: 0   
+        litre: 0
       },
       {
         nom: "Boeuf haché",
         gramme: 300,
-        litre: 0   
+        litre: 0
       },
       {
         nom: "Fromage emmental",
         gramme: 100,
-        litre: 0   
+        litre: 0
       },
       {
         nom: "Vin rouge",
@@ -67,12 +67,12 @@ export class DetailRecetteComponent {
       {
         nom: "Thym",
         gramme: 5,
-        litre: 0   
+        litre: 0
       },
       {
         nom: "Sel et poivre",
         gramme: 0,
-        litre: 0   
+        litre: 0
     }],
   etapes: [
     "Coupez les carottes, tomates et céléris en petits dès.",

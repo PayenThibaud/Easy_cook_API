@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RecetteCardComponent } from '../../components/recettes/recette-card/recette-card.component';
-import { Recette } from '../../components/utils/types/recette.type';
-import { Utilisateur } from '../../components/utils/types/utilisateur.type';
+import { Recette } from '../../utils/types/recette.type';
+import { Utilisateur } from '../../utils/types/utilisateur.type';
 
 @Component({
   selector: 'app-liste-recettes',
@@ -11,8 +11,8 @@ import { Utilisateur } from '../../components/utils/types/utilisateur.type';
   styleUrl: './liste-recettes.component.css'
 })
 export class ListeRecettesComponent {
-  
-  
+
+
   recettes: Recette[] =[
     {
       id: 1,
@@ -28,28 +28,28 @@ export class ListeRecettesComponent {
         },
         {
           nom: "Tomate",
-          gramme: 300,    
-          litre: 0    
+          gramme: 300,
+          litre: 0
         },
         {
           nom: "Céléri",
           gramme: 50,
-          litre: 0   
+          litre: 0
         },
         {
           nom: "Carotte",
           gramme: 200,
-          litre: 0   
+          litre: 0
         },
         {
           nom: "Boeuf haché",
           gramme: 300,
-          litre: 0   
+          litre: 0
         },
         {
           nom: "Fromage emmental",
           gramme: 100,
-          litre: 0   
+          litre: 0
         },
         {
           nom: "Vin rouge",
@@ -69,12 +69,12 @@ export class ListeRecettesComponent {
         {
           nom: "Thym",
           gramme: 5,
-          litre: 0   
+          litre: 0
         },
         {
           nom: "Sel et poivre",
           gramme: 0,
-          litre: 0   
+          litre: 0
       }],
     etapes: [
       "Coupez les carottes, tomates et céléris en petits dès.",
@@ -89,7 +89,7 @@ export class ListeRecettesComponent {
     },
     {
       id: 2,
-      nom: "Pizza veggie", 
+      nom: "Pizza veggie",
       image: "https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_1280.jpg",
       duree: 20,
       calorie: 300,

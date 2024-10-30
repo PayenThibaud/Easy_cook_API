@@ -10,7 +10,6 @@ import java.util.List;
 @Builder
 @Data
 public class RecetteDtoReceive {
-    private int id_recette;
     private String nom;
     private String description;
     private int tempsPreparation;

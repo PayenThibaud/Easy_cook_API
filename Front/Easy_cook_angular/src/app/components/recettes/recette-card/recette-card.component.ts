@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Recette } from '../../utils/types/recette.type';
+import { Recette } from '../../../utils/types/recette.type';
 import { CommonModule } from '@angular/common';
 
 @Component({
