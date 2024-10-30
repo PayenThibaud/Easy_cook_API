@@ -17,4 +17,5 @@ export type Ingredient = {
     nom: string
     gramme: number
     litre: number
+    quantite: number
 }
