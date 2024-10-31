@@ -1,6 +1,32 @@
 
 <section class="flex gap-4 mt-4 justify-center p-8">
-    
+
+  <aside class="sidebar">
+
+    <input type="number" min="1" placeholder="Nombre de couverts" />
+
+    <select>
+      <option value="">Régime</option>
+      <option value="sans gluten">Sans gluten</option>
+      <option value="végétarien">Végétarien</option>
+      <option value="vegan">Végan</option>
+      <option value="sans lactose">Sans lactose</option>
+      <option value="sans noix">Sans noix</option>
+    </select>
+
+    <select>
+      <option value="">Trier par</option>
+      <option value="calories">Calories</option>
+      <option value="temps">Temps de préparation</option>
+      <option value="cout">Coût</option>
+    </select>
+    <div>
+      <input type="checkbox" id="Mes favoris" name="Mes favoris" checked />
+      <label for="Mes favoris"> Mes favoris ♥</label>
+    </div>
+  </aside>
+
+
     <div class="h-56 grid grid-cols-3 gap-4 content-start">
         @for(recette of recettes; track recette) {
             <app-recette-card [recette] = "recette"/>
