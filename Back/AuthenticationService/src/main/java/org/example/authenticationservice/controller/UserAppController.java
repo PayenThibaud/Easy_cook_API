@@ -74,6 +74,7 @@ public class UserAppController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable int id) {
         userAppService.delete(id);
-        return ResponseEntity.ok("Utilisateur supprimé");
+        return ResponseEntity.ok("{\"message\": \"Utilisateur supprimé avec succès\"}");
     }
+
 }

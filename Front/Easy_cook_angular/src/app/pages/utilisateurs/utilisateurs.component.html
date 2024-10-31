@@ -1,35 +1,38 @@
 <div class="space-y-4">
-  <!-- Liste des utilisateurs -->
-  <ul *ngIf="utilisateurs.length > 0; else noUsers">
-    <li *ngFor="let utilisateur of utilisateurs" class="flex justify-between items-center p-4 bg-gray-300 rounded mb-3">
-      <span class="text-lg font-bold text-gray-700">{{ utilisateur.id_utilisateur }}</span>
-      <span class="text-lg font-bold text-gray-700">{{ utilisateur.pseudo }}</span>
-      <span class="text-lg font-bold text-gray-700">{{ utilisateur.email }}</span>
-      <span class="text-lg font-bold text-gray-700">{{ utilisateur.role }}</span>
-    </li>
-  </ul>
-  <ng-template #noUsers>
-    <p>Aucun utilisateur en cours</p>
-  </ng-template>
+  <div class="space-y-4">
 
-  <!-- Formulaire pour ajouter un utilisateur -->
-  <form [formGroup]="utilisateurForm" (ngSubmit)="addUtilisateur()" class="space-y-2">
-    <input formControlName="pseudo" placeholder="Pseudo" class="input" required>
-    <input formControlName="email" placeholder="Email" class="input" required>
-    <input type="password" formControlName="password" placeholder="Mot de passe" class="input" required>
-    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Ajouter Utilisateur</button>
-  </form>
-</div>
+    <ul *ngIf="utilisateurs.length > 0; else noUsers">
+      <li *ngFor="let utilisateur of utilisateurs" class="flex justify-between items-center p-4 bg-gray-300 rounded mb-3">
+        <span class="text-lg font-bold text-gray-700">{{ utilisateur.id_utilisateur }}</span>
+        <span class="text-lg font-bold text-gray-700">{{ utilisateur.pseudo }}</span>
+        <span class="text-lg font-bold text-gray-700">{{ utilisateur.email }}</span>
+        <span class="text-lg font-bold text-gray-700">{{ utilisateur.role }}</span>
 
-<!-- Formulaire pour se connecter -->
+        <button (click)="editUtilisateur(utilisateur)" class="bg-yellow-500 text-white p-1 rounded">Modifier</button>
+
+        <button (click)="deleteUtilisateur(utilisateur.id_utilisateur)" class="bg-red-500 text-white p-1 rounded">Supprimer</button>
+      </li>
+    </ul>
+    <ng-template #noUsers>
+      <p>Aucun utilisateur en cours</p>
+    </ng-template>
+
+    <form [formGroup]="utilisateurForm" (ngSubmit)="isEditMode ? updateUtilisateur() : addUtilisateur()" class="space-y-2">
+      <input formControlName="pseudo" placeholder="Pseudo" class="input" required>
+      <input formControlName="email" placeholder="Email" class="input" required>
+      <input type="password" formControlName="password" placeholder="Mot de passe" class="input" required>
+      <button type="submit" class="bg-blue-500 text-white p-2 rounded">{{ isEditMode ? 'Mettre à jour' : 'Ajouter' }} Utilisateur</button>
+    </form>
+  </div>
+
 <div class="space-y-4">
   <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-2">
     <input formControlName="email" placeholder="Email" class="input" required>
     <input type="password" formControlName="password" placeholder="Mot de passe" class="input" required>
     <button type="submit" class="bg-blue-500 text-white p-2 rounded">Se connecter</button>
   </form>
+</div>
 
-  <!-- Affichage des erreurs de connexion -->
   <div *ngIf="loginError" class="text-red-500">
     <p>Erreur de connexion : {{ loginError }}</p>
   </div>
