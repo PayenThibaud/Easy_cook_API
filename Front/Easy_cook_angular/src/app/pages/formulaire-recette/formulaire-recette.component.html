@@ -1,10 +1,9 @@
 
-<div class="p-6">
-    <button class="pb-6 font-bold">Retour</button>
-
+<div class="flex gap-6 mt-2 justify-center p-6">
+    
     <form action="" >
-        <div class="p-4 bg-black">
-            <h1 class="text-center p-6 font-bold text-white text-2xl dark:text-white">VOTRE RECETTE</h1>
+        <div class="p-6">
+            <h1 class="text-center p-6 font-bold text-2xl">VOTRE RECETTE</h1>
         </div>
         <div class="p-2">
             <label for="nom" class="block text-sm text-slate-700">Nom de la recette</label>
@@ -19,22 +18,24 @@
             <input type="number" id="tempsPreparation" class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md">
         </div>
         <div class="p-2">
-            <label for="nombreCalories" class="block text-sm text-slate-700">Nombre de calories (en calories)</label>
+            <label for="nombreCalories" class="block text-sm text-slate-700">Nombre de calories</label>
             <input type="number" id="nombreCalories" class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md">
         </div>
         <div class="p-2">
             <label for="cout" class="block text-sm text-slate-700">Coût moyen (en euros)</label>
             <input type="number" id="cout" class="mt-1 block w-full px-4 py-2 border border-slate-300 rounded-md">
         </div>
-        <div class="p-2">
-            <button type="submit" class="mt-2 w-full py-3 px-6 bg-green-500 text-white hover:bg-slate-400 rounded">Enregistrer la recette</button>
-        </div>
-        <div class="p-2">
-            <button type="submit" class="mt-2 w-full py-3 px-6 bg-slate-600 text-white hover:bg-slate-400 rounded">Modifier la recette</button>
-        </div>
-        <div class="p-2">
-            <button type="submit" class="mt-2 w-full py-3 px-6 bg-orange-500 text-white hover:bg-slate-400 rounded">Supprimer la recette</button>
+        <div class="grid gap-4 grid-cols-3 p-4">
+            <button type="submit" class="border border-black mt-2 py-3 px-6 hover:bg-green-300 rounded">Enregistrer la recette</button>
+            <button type="submit" class="border border-black mt-2 py-3 px-6 hover:bg-slate-300 rounded">Modifier la recette</button>
+            <button type="submit" class="border border-black mt-2 py-3 px-6 hover:bg-red-300 rounded">Supprimer la recette</button>
         </div>
     </form>
+  
+
+</div>
+
+<div>
+    <a routerLink="/" class="p-4 font-sans hover:font-bold">Accueil ←</a>
 </div>
 

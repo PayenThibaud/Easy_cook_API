@@ -6,6 +6,7 @@ import { FrigoAliment } from '../../utils/types/frigoAliment.type';
 import { FrigoIngredientService } from '../../utils/services/frigo-ingredient.service';
 import { IngredientService } from '../../utils/services/ingredient.service';
 import { catchError, Observable, of, forkJoin  } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-frigo',
