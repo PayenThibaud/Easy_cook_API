@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { UtilisateurService } from '../../utils/services/utilisateur.service';
 import { Utilisateur } from '../../utils/types/utilisateur.type';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // Assurez-vous d'importer CommonModule
-import { Router } from '@angular/router'; // Importez Router pour la redirection
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-utilisateurs',
   standalone: true,
   imports: [
-    CommonModule, // Ajoutez CommonModule ici
+    CommonModule,
     ReactiveFormsModule
   ],
   templateUrl: './utilisateurs.component.html',
@@ -17,19 +17,19 @@ import { Router } from '@angular/router'; // Importez Router pour la redirection
 })
 export class UtilisateurComponent implements OnInit {
   utilisateurs: Utilisateur[] = [];
-  utilisateurForm: FormGroup; // Formulaire pour ajouter un utilisateur
-  loginForm: FormGroup; // Formulaire pour se connecter
-  loginError: string | null = null; // Pour stocker les erreurs de connexion
+  utilisateurForm: FormGroup;
+  loginForm: FormGroup;
+  loginError: string | null = null;
+  isEditMode = false;
+  utilisateurIdToUpdate: number | null = null;
 
-  constructor(private utilisateurService: UtilisateurService, private fb: FormBuilder, private router: Router) { // Ajoutez le Router ici
-    // Initialisation du formulaire pour ajouter un utilisateur
+  constructor(private utilisateurService: UtilisateurService, private fb: FormBuilder, private router: Router) {
     this.utilisateurForm = this.fb.group({
       pseudo: [''],
       email: [''],
       password: [''],
     });
 
-    // Initialisation du formulaire pour se connecter
     this.loginForm = this.fb.group({
       email: [''],
       password: [''],
@@ -53,8 +53,9 @@ export class UtilisateurComponent implements OnInit {
     }
     const newUtilisateur: Utilisateur = this.utilisateurForm.value;
     this.utilisateurService.addUtilisateur(newUtilisateur).subscribe(() => {
-      this.utilisateurs.push(newUtilisateur);
+      alert('Utilisateur ajouté avec succès');
       this.utilisateurForm.reset();
+      this.getAllUtilisateurs();
     });
   }
 
@@ -67,21 +68,63 @@ export class UtilisateurComponent implements OnInit {
 
     this.utilisateurService.login(utilisateur).subscribe({
       next: response => {
-        // Vérifiez si la connexion est réussie (vous pouvez ajuster la condition selon votre API)
         if (response) {
-          // Redirection vers la route /recettes
           this.router.navigate(['/recettes']);
         } else {
           this.loginError = "Erreur lors de la connexion. Vérifiez vos identifiants.";
-          alert(this.loginError); // Optionnel : afficher une alerte
+          alert(this.loginError);
         }
       },
       error: (err) => {
-        // Afficher un message d'erreur personnalisé
         this.loginError = "Erreur lors de la connexion. Vérifiez vos identifiants.";
-        alert(this.loginError); // Afficher une alerte avec le message d'erreur
-        console.error('Erreur de connexion:', err.message); // Affichez uniquement le message d'erreur
+        alert(this.loginError);
+        console.error('Erreur de connexion:', err.message);
       }
+    });
+  }
+
+  deleteUtilisateur(id: number): void {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
+      this.utilisateurService.deleteUtilisateur(id).subscribe({
+        next: (response) => {
+          alert('Utilisateur supprimé avec succès');
+          this.getAllUtilisateurs();
+        },
+        error: err => {
+          console.error('Erreur lors de la suppression de l\'utilisateur:', err);
+        }
+      });
+    }
+  }
+
+
+
+
+  editUtilisateur(utilisateur: Utilisateur): void {
+    this.isEditMode = true;
+    this.utilisateurIdToUpdate = utilisateur.id_utilisateur;
+    this.utilisateurForm.patchValue({
+      pseudo: utilisateur.pseudo,
+      email: utilisateur.email,
+      password: ''
+    });
+  }
+
+  updateUtilisateur(): void {
+    if (this.utilisateurForm.invalid || !this.utilisateurIdToUpdate) {
+      alert("Veuillez remplir tous les champs obligatoires !");
+      return;
+    }
+    const updatedUtilisateur: Utilisateur = this.utilisateurForm.value;
+    this.utilisateurService.updateUtilisateur(this.utilisateurIdToUpdate, updatedUtilisateur).subscribe({
+      next: () => {
+        alert('Utilisateur mis à jour avec succès');
+        this.isEditMode = false;
+        this.utilisateurIdToUpdate = null;
+        this.utilisateurForm.reset();
+        this.getAllUtilisateurs();
+      },
+      error: err => console.error('Erreur lors de la mise à jour de l\'utilisateur:', err)
     });
   }
 }
