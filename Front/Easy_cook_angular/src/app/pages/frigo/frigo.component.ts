@@ -89,40 +89,41 @@ export class FrigoComponent {
           allergens: "",
           barcode: Number(productInfo.code) || 0,
         };
-        // console.log(newIngredient);
+  
         this.ingredientService.postIngredient(newIngredient).subscribe(
           (dataI) => {
-            // Vérifiez la valeur de nombreAliment
             console.log('Quantité entrée:', this.alimentFrigo.nombreAliment);
             const newIngredientFrigo: FrigoAliment = {
               id_frigoAliment: 1,
               id_aliment: dataI.id_ingredient,
-              nombreAliment: this.alimentFrigo.nombreAliment,  // Corrigez ici
+              nombreAliment: this.alimentFrigo.nombreAliment,
               id_frigo: 1,
             };
-            console.log(newIngredientFrigo);
-
+  
             this.frigo_ingredientService.postFrigoIngredient(newIngredientFrigo).subscribe(
               (dataF: FrigoAliment) => {
-                this.listIngredients.push(dataI); // Ajouter seulement après sauvegarde
-                console.log('Nouvel ingrédient ajouté a listIngredient:', this.listIngredients);
-                this.resetForm()
+                // Ajoutez l'ingrédient à `listIngredients`
+                this.listIngredients.push(dataI);
+                // Ajoutez également à `frigo` pour que `getIngredientQuantity` fonctionne
+                this.frigo.push(dataF);
+                console.log(`Ingrédient ${dataI.nom} ajouté avec succès avec quantité ${dataF.nombreAliment}`);
               },
               (error) => {
-                console.error('Error saving ingredient in fridge:', error);
+                console.error('Erreur lors de l\'ajout de l\'ingrédient dans le frigo:', error);
               }
             );
           },
           (error) => {
-            console.error('Error saving ingredient:', error);
+            console.error('Erreur lors de l\'enregistrement de l\'ingrédient:', error);
           }
         );
       },
       (error) => {
-        console.error('Error retrieving product information:', error);
+        console.error('Erreur lors de la récupération des informations du produit:', error);
       }
     );
   }
+  
 
   removeIngredient(index: number): void {
     const ingredientToRemove = this.listIngredients[index];
