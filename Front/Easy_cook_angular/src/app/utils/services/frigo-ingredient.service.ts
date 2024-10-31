@@ -20,4 +20,32 @@ export class FrigoIngredientService {
     )
   }
 
+  postFrigoIngredient(frigoIngredient : FrigoAliment) : Observable<FrigoAliment>{
+    return this.http.post<FrigoAliment>(this.serviceFrigo_ingredient_url, frigoIngredient).pipe(
+      map(response => response),
+      catchError(error => {
+        alert(error.message);
+        const defautlFrigoIngredient: FrigoAliment = {
+          id_frigoAliment: 0,
+          id_aliment: 0,
+          nombreAliment: 0,
+          id_frigo: 0,
+        };
+        return of(defautlFrigoIngredient);
+      })
+    )
+  }
+
+
+  deleteFrigoIngredient(frigoIngredientId: number): Observable<string> {
+    return this.http.delete(`${this.serviceFrigo_ingredient_url}/${frigoIngredientId}`, { responseType: 'text' }).pipe(
+        catchError(error => {
+            console.error('Error:', error);
+            alert(error.message);
+            return of(''); // Retourne une chaîne vide en cas d'erreur
+        })
+    );
+}
+  
+
 }

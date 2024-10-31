@@ -1,5 +1,5 @@
 export type Ingredient = {
-    id: number
+    id_ingredient: number
     nom: string
     calories : number
     allergens: string

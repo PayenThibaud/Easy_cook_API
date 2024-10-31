@@ -17,7 +17,7 @@ export class IngredientService {
         alert(error.message);
         // Valeurs par défaut pour un Ingredient inconnu
         const defaultIngredient: Ingredient = {
-          id: 0,
+          id_ingredient: 0,
           nom: 'Inconnu',
           calories: 0,
           allergens: 'Non spécifié',
@@ -26,5 +26,22 @@ export class IngredientService {
         return of(defaultIngredient);
       })
     )
+  }
+
+  postIngredient(ingredient: Ingredient): Observable<Ingredient> {
+    return this.http.post<Ingredient>(this.serviceingredient_url, ingredient).pipe(
+      map(response => response),
+      catchError(error => {
+        alert(error.message);
+        const defaultIngredient: Ingredient = {
+          id_ingredient: 0,
+          nom: 'Inconnu',
+          calories: 0,
+          allergens: 'Non spécifié',
+          barcode: 0
+        };
+        return of(defaultIngredient);
+      })
+    );
   }
 }

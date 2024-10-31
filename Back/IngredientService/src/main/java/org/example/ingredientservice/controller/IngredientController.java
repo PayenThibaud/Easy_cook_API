@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ingredient")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class IngredientController {
     @Autowired
     private IngredientService ingredientService;
