@@ -1,30 +1,34 @@
 <div class="space-y-4">
-  <div class="space-y-4">
 
-    <ul *ngIf="utilisateurs.length > 0; else noUsers">
-      <li *ngFor="let utilisateur of utilisateurs" class="flex justify-between items-center p-4 bg-gray-300 rounded mb-3">
-        <span class="text-lg font-bold text-gray-700">{{ utilisateur.id_utilisateur }}</span>
-        <span class="text-lg font-bold text-gray-700">{{ utilisateur.pseudo }}</span>
-        <span class="text-lg font-bold text-gray-700">{{ utilisateur.email }}</span>
-        <span class="text-lg font-bold text-gray-700">{{ utilisateur.role }}</span>
+  <!--Formulaire inscription-->
+    
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
+      <form [formGroup]="utilisateurForm" (ngSubmit)="isEditMode ? updateUtilisateur() : addUtilisateur()" class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm bg-slate-300 p-5 rounded-lg">
+        <h1>Formulaire d'inscription</h1>
+      <div>
+          <label class="block text-sm font-medium leading-6 text-gray-900" for="nom">Pseudo :</label>
+          <input required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="pseudo" placeholder="Pseudo">
+      </div>
 
-        <button (click)="editUtilisateur(utilisateur)" class="bg-yellow-500 text-white p-1 rounded">Modifier</button>
+      <div>
+        <label class="block text-sm font-medium leading-6 text-gray-900" for="nom">Mail :</label>
+        <input required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="email" placeholder="Email">
+    </div>
 
-        <button (click)="deleteUtilisateur(utilisateur.id_utilisateur)" class="bg-red-500 text-white p-1 rounded">Supprimer</button>
-      </li>
-    </ul>
-    <ng-template #noUsers>
-      <p>Aucun utilisateur en cours</p>
-    </ng-template>
+    <div>
+      <label class="block text-sm font-medium leading-6 text-gray-900" for="nom">Mot de passe :</label>
+      <input required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="password" formControlName="password" placeholder="Mot de passe">
+    </div>
+    <br>
+    <div>
+      <button type="submit" class="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ isEditMode ? 'Mettre à jour' : 'Ajouter' }} Utilisateur</button>
+    </div>  
+      </form>
+    </div>
 
-    <form [formGroup]="utilisateurForm" (ngSubmit)="isEditMode ? updateUtilisateur() : addUtilisateur()" class="space-y-2">
-      <input formControlName="pseudo" placeholder="Pseudo" class="input" required>
-      <input formControlName="email" placeholder="Email" class="input" required>
-      <input type="password" formControlName="password" placeholder="Mot de passe" class="input" required>
-      <button type="submit" class="bg-blue-500 text-white p-2 rounded">{{ isEditMode ? 'Mettre à jour' : 'Ajouter' }} Utilisateur</button>
-    </form>
-  </div>
 
+
+<!--Formulaire connexion
 <div class="space-y-4">
   <form [formGroup]="loginForm" (ngSubmit)="login()" class="space-y-2">
     <input formControlName="email" placeholder="Email" class="input" required>
@@ -35,5 +39,34 @@
 
   <div *ngIf="loginError" class="text-red-500">
     <p>Erreur de connexion : {{ loginError }}</p>
+  </div>-->
+
+
+
+<!--Affichage utilisateurs-->
+  <div class="space-y-4">
+    <div class="bg-black p-4">
+      <h1 class="text-white text-center font-bold">Liste des utilisateurs</h1>
+    </div>
+
+    <ul *ngIf="utilisateurs.length > 0; else noUsers">
+      <li *ngFor="let utilisateur of utilisateurs" class="flex justify-between items-center p-4 bg-gray-300 rounded mb-3">
+        <span class="text-lg text-gray-700">{{ utilisateur.id_utilisateur }}</span>
+        <span class="text-lg text-gray-700">{{ utilisateur.pseudo }}</span>
+        <span class="text-lg text-gray-700">{{ utilisateur.email }}</span>
+        <span class="text-lg text-gray-700">{{ utilisateur.role }}</span>
+
+        <button (click)="editUtilisateur(utilisateur)" class="border border-black mt-2 py-3 px-6 hover:bg-slate-300 rounded">Modifier</button>
+
+        <button (click)="deleteUtilisateur(utilisateur.id_utilisateur)" class="border border-black mt-2 py-3 px-6 hover:bg-red-300 rounded">Supprimer</button>
+      </li>
+    </ul>
+    <ng-template #noUsers>
+      <p>Aucun utilisateur en cours</p>
+    </ng-template>
   </div>
+
+  
+
+
 </div>
