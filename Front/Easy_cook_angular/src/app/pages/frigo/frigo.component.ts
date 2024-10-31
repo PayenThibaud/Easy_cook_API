@@ -106,6 +106,7 @@ export class FrigoComponent {
               (dataF: FrigoAliment) => {
                 this.listIngredients.push(dataI); // Ajouter seulement après sauvegarde
                 console.log('Nouvel ingrédient ajouté a listIngredient:', this.listIngredients);
+                this.resetForm()
               },
               (error) => {
                 console.error('Error saving ingredient in fridge:', error);
@@ -144,4 +145,12 @@ export class FrigoComponent {
     }
   }
   
+  resetForm(){
+    this.alimentFrigo = {
+      id_frigoAliment: 0,
+      id_aliment: 0,
+      nombreAliment: 0,
+      id_frigo: 1,
+    };
+  }
 }
