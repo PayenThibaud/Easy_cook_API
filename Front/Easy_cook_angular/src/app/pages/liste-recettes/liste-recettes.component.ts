@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RecetteCardComponent } from '../../components/recettes/recette-card/recette-card.component';
 import { Recette } from '../../utils/types/recette.type';
-import { Utilisateur } from '../../utils/types/utilisateur.type';
 
 @Component({
   selector: 'app-liste-recettes',
@@ -14,6 +13,9 @@ export class ListeRecettesComponent {
 
 
   recettes: Recette[] =[
+
+
+
     {
       id: 1,
       nom: "Spagetti bolognaise",
@@ -24,68 +26,68 @@ export class ListeRecettesComponent {
       ingredients: [{
         nom: "Spagetti",
         gramme: 215,
-        litre:0, 
+        litre:0,
         quantite: 0
         },
         {
           nom: "Tomate",
-          gramme: 300,    
-          litre: 0, 
-          quantite: 0    
+          gramme: 300,
+          litre: 0,
+          quantite: 0
         },
         {
           nom: "Céléri",
           gramme: 50,
-          litre: 0, 
-          quantite: 0   
+          litre: 0,
+          quantite: 0
         },
         {
           nom: "Carotte",
           gramme: 200,
-          litre: 0, 
-          quantite: 0   
+          litre: 0,
+          quantite: 0
         },
         {
           nom: "Boeuf haché",
           gramme: 300,
-          litre: 0, 
-          quantite: 0   
+          litre: 0,
+          quantite: 0
         },
         {
           nom: "Fromage emmental",
           gramme: 100,
-          litre: 0, 
-          quantite: 0   
+          litre: 0,
+          quantite: 0
         },
         {
           nom: "Vin rouge",
           gramme: 0,
-          litre: 0.3, 
+          litre: 0.3,
           quantite: 0
         },
         {
           nom: "Bouillon de légumes",
           gramme: 0,
-          litre: 0.5, 
+          litre: 0.5,
           quantite: 0
         },
         {
           nom: "Huile d'olive",
           gramme: 0,
-          litre: 0.015, 
+          litre: 0.015,
           quantite: 0
         },
         {
           nom: "Thym",
           gramme: 5,
-          litre: 0, 
-          quantite: 0   
+          litre: 0,
+          quantite: 0
         },
         {
           nom: "Sel et poivre",
           gramme: 0,
-          litre: 0, 
-          quantite: 0   
+          litre: 0,
+          quantite: 0
       }],
     etapes: [
       "Coupez les carottes, tomates et céléris en petits dès.",
@@ -109,37 +111,37 @@ export class ListeRecettesComponent {
         {
           nom: "Pâte à pizza",
           gramme: 80,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom: "Sauce tomate",
           gramme: 0,
-          litre: 0.20, 
+          litre: 0.20,
           quantite: 0
         },
         {
           nom: "Tomate fraîche",
           gramme: 50,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom: "Basilic",
           gramme: 0,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom: "Fromage râpé",
           gramme: 100,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom: "Sel, poivre",
           gramme: 0,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
       ],
@@ -165,49 +167,49 @@ export class ListeRecettesComponent {
         {
           nom:"cocombre",
           gramme: 40,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom:"tomate",
           gramme: 50,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom:"olive noire",
           gramme: 10,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom:"tofu",
           gramme: 80,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom:"huile d'olive",
           gramme: 40,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom:"échalotte",
           gramme: 10,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
         {
           nom:"vinaige de cidre",
           gramme:0,
-          litre: 0.05, 
+          litre: 0.05,
           quantite: 0
         },
         {
           nom:"Sel et poivre",
           gramme: 0,
-          litre: 0, 
+          litre: 0,
           quantite: 0
         },
       ],
@@ -222,4 +224,10 @@ export class ListeRecettesComponent {
     }
   ]
 
+
+  ;
+
+  nombreCouverts: number = 1;
+  regimeChoisi: string = '';
+  triChoisi: string = '';
 }
